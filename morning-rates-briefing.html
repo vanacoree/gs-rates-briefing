@@ -7,80 +7,38 @@
   <style>
     :root { color-scheme: light; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #EEF0F5; color: #1A1A2E; font-size: 13px; min-height: 100vh; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-      background: #EEF0F5;
-      color: #1A1A2E;
-      font-size: 13px;
-      min-height: 100vh;
-    }
-
-    /* ── HEADER ── */
-    .gs-header {
-      background: linear-gradient(135deg, #0B2D5E 0%, #1A4A8A 100%);
-      color: #fff;
-      padding: 14px 20px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 3px solid #C9A227;
-    }
+    /* HEADER */
+    .gs-header { background: linear-gradient(135deg, #0B2D5E 0%, #1A4A8A 100%); color: #fff; padding: 14px 20px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #C9A227; }
     .gs-header-left { display: flex; align-items: center; gap: 16px; }
     .gs-logo-block { font-size: 20px; font-weight: 800; letter-spacing: 2px; color: #C9A227; }
     .gs-header-title { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; opacity: 0.85; text-transform: uppercase; }
     .gs-header-date { font-size: 11px; opacity: 0.7; margin-top: 2px; }
     .gs-header-right { display: flex; align-items: center; gap: 12px; }
     .last-updated { font-size: 10px; opacity: 0.65; text-align: right; }
-    .refresh-btn {
-      background: transparent;
-      color: #C9A227;
-      border: 1px solid rgba(201,162,39,0.5);
-      padding: 5px 14px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: default;
-      letter-spacing: 0.5px;
-    }
+    .last-updated strong { font-size: 12px; opacity: 1; display: block; color: #C9A227; }
+    .refresh-btn { background: transparent; color: #C9A227; border: 1px solid rgba(201,162,39,0.5); padding: 5px 14px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: default; letter-spacing: 0.5px; }
 
-    /* ── LAYOUT ── */
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 14px 16px;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
+    /* LAYOUT */
+    .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px 16px; max-width: 1300px; margin: 0 auto; }
     .full-width { grid-column: 1 / -1; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; grid-column: 1 / -1; }
 
-    /* ── CARDS ── */
-    .card {
-      background: #fff;
-      border-radius: 6px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-      overflow: hidden;
-    }
-    .card-header {
-      background: #F8F9FC;
-      border-bottom: 1px solid #E2E8F0;
-      padding: 8px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .card-title {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: #0B2D5E;
-    }
+    /* CARDS */
+    .card { background: #fff; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden; }
+    .card-header { background: #F8F9FC; border-bottom: 1px solid #E2E8F0; padding: 8px 14px; display: flex; align-items: center; justify-content: space-between; }
+    .card-title { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #0B2D5E; }
     .card-subtitle { font-size: 10px; color: #94A3B8; }
     .card-body { padding: 12px 14px; }
 
-    /* ── CENTRAL BANKS ── */
+    /* SOURCE LINKS — applied to any element with a source */
+    a.src-link { color: inherit; text-decoration: underline; text-decoration-color: rgba(0,0,0,0.25); text-underline-offset: 2px; cursor: pointer; }
+    a.src-link:hover { text-decoration-color: #0B2D5E; opacity: 0.85; }
+    a.src-link-light { color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.35); text-underline-offset: 2px; cursor: pointer; }
+    a.src-link-light:hover { text-decoration-color: #C9A227; }
+
+    /* CENTRAL BANKS */
     .cb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
     .cb-item { text-align: center; padding: 10px 6px; background: #F8F9FC; border-radius: 5px; }
     .cb-label { font-size: 10px; font-weight: 700; color: #64748B; letter-spacing: 0.8px; margin-bottom: 4px; }
@@ -89,13 +47,9 @@
     .cb-meta { font-size: 9.5px; color: #64748B; line-height: 1.5; }
     .cb-next { font-size: 9px; color: #94A3B8; margin-top: 2px; }
 
-    /* ── YIELD TABLE ── */
+    /* YIELD TABLE */
     .yield-table { width: 100%; border-collapse: collapse; }
-    .yield-table thead th {
-      font-size: 9.5px; font-weight: 700; color: #64748B;
-      letter-spacing: 0.7px; text-align: right; padding: 4px 6px;
-      border-bottom: 1px solid #E2E8F0; text-transform: uppercase;
-    }
+    .yield-table thead th { font-size: 9.5px; font-weight: 700; color: #64748B; letter-spacing: 0.7px; text-align: right; padding: 4px 6px; border-bottom: 1px solid #E2E8F0; text-transform: uppercase; }
     .yield-table thead th:first-child { text-align: left; }
     .yield-table tbody tr { border-bottom: 1px solid #F1F5F9; }
     .yield-table tbody tr:last-child { border-bottom: none; }
@@ -109,13 +63,13 @@
     .chg-dn { color: #0A7C59; }
     .chg-flat { color: #94A3B8; }
 
-    /* ── MONEY MARKETS ── */
+    /* MONEY MARKETS */
     .mm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .mm-item { background: #F8F9FC; border-radius: 4px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; }
     .mm-label { font-size: 10px; font-weight: 700; color: #64748B; }
     .mm-val { font-size: 13px; font-weight: 700; color: #0B2D5E; }
 
-    /* ── SPREADS ── */
+    /* SPREADS */
     .spread-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
     .spread-item { text-align: center; padding: 10px 8px; background: #F8F9FC; border-radius: 5px; border-top: 3px solid #0B2D5E; }
     .spread-label { font-size: 9.5px; font-weight: 700; color: #64748B; letter-spacing: 0.5px; margin-bottom: 4px; }
@@ -123,25 +77,25 @@
     .spread-unit { font-size: 10px; color: #94A3B8; margin-left: 2px; }
     .spread-chg { font-size: 10px; font-weight: 600; margin-top: 4px; }
 
-    /* ── FX ── */
+    /* FX */
     .fx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .fx-item { background: #F8F9FC; border-radius: 4px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; }
     .fx-pair { font-size: 10px; font-weight: 700; color: #64748B; }
     .fx-val { font-size: 13px; font-weight: 700; color: #0B2D5E; }
 
-    /* ── BREAKEVENS ── */
+    /* BREAKEVENS */
     .bei-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .bei-item { background: #F8F9FC; border-radius: 4px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; }
     .bei-label { font-size: 10px; font-weight: 700; color: #64748B; }
     .bei-val { font-size: 13px; font-weight: 700; color: #0B2D5E; }
 
-    /* ── VOLATILITY ── */
+    /* VOLATILITY */
     .vol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .vol-item { background: #F8F9FC; border-radius: 4px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; }
     .vol-label { font-size: 10px; font-weight: 700; color: #64748B; }
     .vol-val { font-size: 13px; font-weight: 700; color: #0B2D5E; }
 
-    /* ── HEADLINES ── */
+    /* HEADLINES */
     .headline-list { display: flex; flex-direction: column; gap: 8px; }
     .headline-item { padding: 8px 10px; border-left: 3px solid #C9A227; background: #FFFDF4; border-radius: 0 4px 4px 0; }
     .headline-text { font-size: 12px; line-height: 1.5; color: #1A1A2E; margin-bottom: 4px; }
@@ -150,9 +104,8 @@
     .headline-source:hover { background: #1A4A8A; }
     .headline-time { font-size: 10px; color: #94A3B8; }
 
-    /* ── WEEK AHEAD CALENDAR ── */
+    /* WEEK AHEAD CALENDAR */
     .cal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-    .cal-day { }
     .cal-day-header { font-size: 10px; font-weight: 700; color: #fff; background: #0B2D5E; padding: 5px 8px; border-radius: 4px 4px 0 0; text-align: center; }
     .cal-day-header.today { background: #C9A227; color: #0B2D5E; }
     .cal-events { background: #F8F9FC; border-radius: 0 0 4px 4px; padding: 6px 8px; min-height: 54px; }
@@ -163,84 +116,34 @@
     .cal-event.low { color: #475569; }
     .cal-event.auction { color: #6D28D9; font-style: italic; }
     .cal-empty { font-size: 10px; color: #CBD5E1; font-style: italic; }
-    .cal-impact-badge {
-      display: inline-block; font-size: 8.5px; font-weight: 700;
-      padding: 1px 4px; border-radius: 2px; margin-right: 3px; vertical-align: middle;
-    }
+    .cal-impact-badge { display: inline-block; font-size: 8.5px; font-weight: 700; padding: 1px 4px; border-radius: 2px; margin-right: 3px; vertical-align: middle; }
     .badge-high { background: #FEE2E2; color: #B91C1C; }
-    .badge-med  { background: #DBEAFE; color: #1D4ED8; }
+    .badge-med { background: #DBEAFE; color: #1D4ED8; }
     .badge-auction { background: #EDE9FE; color: #6D28D9; }
 
-    /* ── TRADE IDEA ── */
-    .trade-card {
-      background: linear-gradient(135deg, #0B2D5E 0%, #1A4A8A 100%);
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(11,45,94,0.25);
-    }
-    .trade-header {
-      padding: 12px 16px 10px;
-      border-bottom: 1px solid rgba(201,162,39,0.3);
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .trade-badge {
-      font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
-      color: #0B2D5E; background: #C9A227; padding: 3px 8px; border-radius: 3px;
-      white-space: nowrap; margin-top: 2px;
-    }
+    /* TRADE IDEA */
+    .trade-card { background: linear-gradient(135deg, #0B2D5E 0%, #1A4A8A 100%); border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(11,45,94,0.25); }
+    .trade-header { padding: 12px 16px 10px; border-bottom: 1px solid rgba(201,162,39,0.3); display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .trade-badge { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #0B2D5E; background: #C9A227; padding: 3px 8px; border-radius: 3px; white-space: nowrap; margin-top: 2px; }
     .trade-meta { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 4px; }
     .trade-title { font-size: 16px; font-weight: 800; color: #fff; line-height: 1.3; flex: 1; }
-    .trade-direction {
-      display: flex; flex-direction: column; align-items: flex-end; gap: 4px; white-space: nowrap;
-    }
-    .trade-dir-tag {
-      font-size: 10px; font-weight: 700; color: #fff;
-      border: 1px solid rgba(255,255,255,0.3);
-      padding: 3px 10px; border-radius: 3px;
-    }
-    .trade-horizon-tag {
-      font-size: 9px; color: rgba(255,255,255,0.6);
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 2px 8px; border-radius: 3px;
-    }
-
+    .trade-direction { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; white-space: nowrap; }
+    .trade-dir-tag { font-size: 10px; font-weight: 700; color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 3px 10px; border-radius: 3px; }
+    .trade-horizon-tag { font-size: 9px; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 3px; }
     .trade-body { padding: 14px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    .trade-rationale h4, .trade-execution h4 {
-      font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
-      color: #C9A227; margin-bottom: 8px;
-    }
+    .trade-rationale h4, .trade-execution h4 { font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #C9A227; margin-bottom: 8px; }
     .trade-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-    .trade-bullets li {
-      font-size: 12px; color: rgba(255,255,255,0.88); line-height: 1.5;
-      padding-left: 14px; position: relative;
-    }
-    .trade-bullets li::before {
-      content: "▸"; color: #C9A227; position: absolute; left: 0; font-size: 10px; top: 2px;
-    }
-
+    .trade-bullets li { font-size: 12px; color: rgba(255,255,255,0.88); line-height: 1.5; padding-left: 14px; position: relative; }
+    .trade-bullets li::before { content: "▸"; color: #C9A227; position: absolute; left: 0; font-size: 10px; top: 2px; }
     .exec-block { display: flex; flex-direction: column; gap: 8px; }
     .exec-row { background: rgba(255,255,255,0.07); border-radius: 4px; padding: 8px 10px; }
     .exec-label { font-size: 9px; font-weight: 700; color: rgba(201,162,39,0.8); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 3px; }
     .exec-val { font-size: 12px; color: #fff; line-height: 1.4; }
+    .trade-footer { padding: 8px 16px; background: rgba(0,0,0,0.15); font-size: 10px; color: rgba(255,255,255,0.4); border-top: 1px solid rgba(255,255,255,0.08); }
 
-    .trade-footer {
-      padding: 8px 16px;
-      background: rgba(0,0,0,0.15);
-      font-size: 10px;
-      color: rgba(255,255,255,0.4);
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    /* ── TRADE HISTORY ── */
+    /* TRADE HISTORY */
     .history-table { width: 100%; border-collapse: collapse; }
-    .history-table thead th {
-      font-size: 9.5px; font-weight: 700; color: #64748B; letter-spacing: 0.7px;
-      text-align: left; padding: 4px 8px; border-bottom: 1px solid #E2E8F0; text-transform: uppercase;
-    }
+    .history-table thead th { font-size: 9.5px; font-weight: 700; color: #64748B; letter-spacing: 0.7px; text-align: left; padding: 4px 8px; border-bottom: 1px solid #E2E8F0; text-transform: uppercase; }
     .history-table tbody tr { border-bottom: 1px solid #F1F5F9; }
     .history-table tbody tr:last-child { border-bottom: none; }
     .history-table tbody td { padding: 6px 8px; font-size: 11.5px; vertical-align: top; }
@@ -254,23 +157,16 @@
     .status-closed-loss { background: #FEE2E2; color: #B91C1C; }
     .status-expired { background: #F1F5F9; color: #64748B; }
 
-    /* ── GS HOUSE VIEW ── */
-    .house-view {
-      background: linear-gradient(135deg, #0B2D5E 0%, #1A4A8A 100%);
-      color: #fff; border-radius: 6px; padding: 14px 18px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
-    }
+    /* GS HOUSE VIEW */
+    .house-view { background: linear-gradient(135deg, #0B2D5E 0%, #1A4A8A 100%); color: #fff; border-radius: 6px; padding: 14px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.10); }
     .hv-title { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #C9A227; margin-bottom: 8px; }
     .hv-text { font-size: 12.5px; line-height: 1.7; opacity: 0.92; }
-
     .placeholder { color: #CBD5E1; font-style: italic; }
-    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; grid-column: 1 / -1; }
 
     @media (max-width: 900px) {
       .main-grid { grid-template-columns: 1fr; }
       .full-width, .three-col { grid-column: 1; }
       .three-col { grid-template-columns: 1fr; }
-      .cb-grid { grid-template-columns: repeat(3, 1fr); }
       .spread-grid { grid-template-columns: repeat(2, 1fr); }
       .cal-grid { grid-template-columns: 1fr; }
       .trade-body { grid-template-columns: 1fr; }
@@ -279,133 +175,132 @@
 </head>
 <body>
 
-<!-- ════════════════════════════════════════
-     DATA BLOCK — Updated each morning by scheduled task
-     ════════════════════════════════════════ -->
 <script id="briefing-data">
 const DATA = {
-  lastUpdated: "Sun 14 Jun 2026 — refreshed with latest data",
+  lastUpdated: "Sun 14 Jun 2026, 09:47 CET",
   todayLabel: "Monday 16 June 2026",
 
   centralBanks: {
-    ecb:  { rate: "2.25%", change: "+25bp Jun '26", nextMeeting: "23 Jul 2026", pricing: "~76% hold" },
-    fed:  { rate: "3.50–3.75%", change: "Hold ×3 meetings", nextMeeting: "17–18 Jun 2026", pricing: "97% hold" },
-    boe:  { rate: "3.75%", change: "Hold Apr '26", nextMeeting: "18 Jun 2026", pricing: "Hold expected" }
+    ecb:  { rate: "2.25%", change: "+25bp Jun '26", nextMeeting: "23 Jul 2026", pricing: "~76% hold", src: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260605.en.html" },
+    fed:  { rate: "3.50–3.75%", change: "Hold ×3 meetings", nextMeeting: "17–18 Jun 2026", pricing: "97% hold", src: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
+    boe:  { rate: "3.75%", change: "Hold Apr '26", nextMeeting: "18 Jun 2026", pricing: "Hold expected", src: "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate" }
   },
 
   govtBonds: [
     { flag: "🇩🇪", label: "Germany", tenors: [
-      { t: "2Y", y: "2.75", chg: "-2" },
-      { t: "5Y", y: "2.85", chg: "-2" },
-      { t: "10Y", y: "2.98", chg: "-3" },
-      { t: "30Y", y: "3.48", chg: "-1" }
+      { t: "2Y",  y: "2.71", chg: "-2", src: "https://tradingeconomics.com/germany/2-year-bond-yield" },
+      { t: "5Y",  y: "2.82", chg: "-2", src: "https://tradingeconomics.com/germany/5-year-bond-yield" },
+      { t: "10Y", y: "3.00", chg: "-3", src: "https://tradingeconomics.com/germany/government-bond-yield" },
+      { t: "30Y", y: "3.47", chg: "-1", src: "https://tradingeconomics.com/germany/30-year-bond-yield" }
     ]},
     { flag: "🇺🇸", label: "US", tenors: [
-      { t: "2Y", y: "4.09", chg: "—" },
-      { t: "5Y", y: "4.22", chg: "-2" },
-      { t: "10Y", y: "4.49", chg: "-10" },
-      { t: "30Y", y: "4.97", chg: "-4" }
+      { t: "2Y",  y: "4.09", chg: "—",  src: "https://tradingeconomics.com/united-states/2-year-note-yield" },
+      { t: "5Y",  y: "4.22", chg: "-2", src: "https://tradingeconomics.com/united-states/5-year-note-yield" },
+      { t: "10Y", y: "4.49", chg: "-10",src: "https://tradingeconomics.com/united-states/government-bond-yield" },
+      { t: "30Y", y: "4.97", chg: "-4", src: "https://tradingeconomics.com/united-states/30-year-bond-yield" }
     ]},
-    { flag: "🇬🇧", label: "UK",     tenors: [{ t: "2Y", y: "4.12", chg: "—" }, { t: "10Y", y: "4.79", chg: "-5" }] },
-    { flag: "🇫🇷", label: "France", tenors: [{ t: "10Y", y: "3.67", chg: "-3" }] },
-    { flag: "🇮🇹", label: "Italy",  tenors: [{ t: "10Y", y: "3.88", chg: "-2" }] },
-    { flag: "🇪🇸", label: "Spain",  tenors: [{ t: "10Y", y: "3.48", chg: "-2" }] }
+    { flag: "🇬🇧", label: "UK", tenors: [
+      { t: "2Y",  y: "4.12", chg: "—",  src: "https://tradingeconomics.com/united-kingdom/2-year-bond-yield" },
+      { t: "10Y", y: "4.87", chg: "-5", src: "https://tradingeconomics.com/united-kingdom/government-bond-yield" }
+    ]},
+    { flag: "🇫🇷", label: "France", tenors: [{ t: "10Y", y: "3.67", chg: "-3", src: "https://tradingeconomics.com/france/government-bond-yield" }] },
+    { flag: "🇮🇹", label: "Italy",  tenors: [{ t: "10Y", y: "3.73", chg: "-8", src: "https://tradingeconomics.com/italy/government-bond-yield" }] },
+    { flag: "🇪🇸", label: "Spain",  tenors: [{ t: "10Y", y: "3.48", chg: "-2", src: "https://tradingeconomics.com/spain/government-bond-yield" }] }
   ],
 
   moneyMarkets: [
-    { label: "€STR",       val: "2.15%" },
-    { label: "EURIBOR 3M", val: "2.38%" },
-    { label: "EURIBOR 6M", val: "2.45%" },
-    { label: "SOFR",       val: "3.55%" },
-    { label: "SONIA",      val: "4.45%" },
-    { label: "CHF SARON",  val: "0.82%" }
+    { label: "€STR",       val: "2.15%", src: "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_short-term_rate/html/index.en.html" },
+    { label: "EURIBOR 3M", val: "2.38%", src: "https://www.euribor-rates.eu/en/current-euribor-rates/2/current-euribor-rate-3-months.aspx" },
+    { label: "EURIBOR 6M", val: "2.45%", src: "https://www.euribor-rates.eu/en/current-euribor-rates/3/current-euribor-rate-6-months.aspx" },
+    { label: "SOFR",       val: "3.55%", src: "https://www.newyorkfed.org/markets/reference-rates/sofr" },
+    { label: "SONIA",      val: "4.45%", src: "https://www.bankofengland.co.uk/markets/sonia-benchmark" },
+    { label: "CHF SARON",  val: "0.82%", src: "https://www.six-group.com/en/products-services/the-swiss-stock-exchange/market-data/indices/money-market-rates/saron.html" }
   ],
 
   spreads: [
-    { label: "BTP–Bund 10Y",   val: "90",  unit: "bps", chg: "-2",  chgDir: -1 },
-    { label: "OAT–Bund 10Y",   val: "69",  unit: "bps", chg: "-2",  chgDir: -1 },
-    { label: "Bonos–Bund 10Y", val: "50",  unit: "bps", chg: "-1",  chgDir: -1 },
-    { label: "EUR ASW 10Y",    val: "-28", unit: "bps", chg: "+1",  chgDir: 1  }
+    { label: "BTP–Bund 10Y",   val: "73",  unit: "bps", chg: "-8", chgDir: -1, src: "https://tradingeconomics.com/italy/government-bond-yield" },
+    { label: "OAT–Bund 10Y",   val: "67",  unit: "bps", chg: "-3", chgDir: -1, src: "https://tradingeconomics.com/france/government-bond-yield" },
+    { label: "Bonos–Bund 10Y", val: "48",  unit: "bps", chg: "-2", chgDir: -1, src: "https://tradingeconomics.com/spain/government-bond-yield" },
+    { label: "EUR ASW 10Y",    val: "-28", unit: "bps", chg: "+1", chgDir: 1,  src: "https://www.bloomberg.com/markets/rates-bonds/government-bonds/germany" }
   ],
 
   fx: [
-    { pair: "EUR/USD", val: "1.1565", chg: "-0.07%" },
-    { pair: "EUR/GBP", val: "0.8628", chg: "+0.03%" },
-    { pair: "EUR/CHF", val: "0.9204", chg: "-0.12%" },
-    { pair: "EUR/JPY", val: "184.50", chg: "+0.18%" },
-    { pair: "USD/JPY", val: "159.55", chg: "+0.25%" },
-    { pair: "GBP/USD", val: "1.3404", chg: "-0.10%" }
+    { pair: "EUR/USD", val: "1.1574", chg: "-0.07%", src: "https://www.exchangerates.org.uk/historical/find-exchange-rate-history-for-12_06_2026" },
+    { pair: "EUR/GBP", val: "0.8632", chg: "+0.03%", src: "https://www.exchangerates.org.uk/historical/find-exchange-rate-history-for-12_06_2026" },
+    { pair: "EUR/CHF", val: "0.9216", chg: "-0.12%", src: "https://www.mtfxgroup.com/tools/historical-currency-exchange-rates/eur-to-chf-rate/" },
+    { pair: "EUR/JPY", val: "185.42", chg: "+0.18%", src: "https://www.mtfxgroup.com/tools/historical-currency-exchange-rates/eur-to-jpy-rate/" },
+    { pair: "USD/JPY", val: "160.19", chg: "+0.25%", src: "https://www.mtfxgroup.com/tools/historical-currency-exchange-rates/usd-to-jpy-rate/" },
+    { pair: "GBP/USD", val: "1.3408", chg: "-0.10%", src: "https://www.exchangerates.org.uk/historical/find-exchange-rate-history-for-12_06_2026" }
   ],
 
   breakevens: [
-    { label: "EUR 5Y5Y BEI", val: "2.18%" },
-    { label: "EUR 10Y BEI",  val: "2.09%" },
-    { label: "US 5Y5Y BEI",  val: "2.42%" },
-    { label: "US 10Y BEI",   val: "2.35%" }
+    { label: "EUR 5Y5Y BEI", val: "2.18%", src: "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/long-term_interest_rates_and_inflation_swap_rates/html/index.en.html" },
+    { label: "EUR 10Y BEI",  val: "2.09%", src: "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/long-term_interest_rates_and_inflation_swap_rates/html/index.en.html" },
+    { label: "US 5Y5Y BEI",  val: "2.42%", src: "https://fred.stlouisfed.org/series/T5YIFR" },
+    { label: "US 10Y BEI",   val: "2.35%", src: "https://fred.stlouisfed.org/series/T10YIE" }
   ],
 
   volatility: [
-    { label: "VIX",          val: "13.8" },
-    { label: "MOVE Index",   val: "89.4" },
-    { label: "iTraxx Main",  val: "52bp" },
-    { label: "iTraxx Xover", val: "285bp" }
+    { label: "VIX",          val: "17.68", src: "https://www.cnbc.com/quotes/.VIX" },
+    { label: "MOVE Index",   val: "69.45", src: "https://www.cnbc.com/quotes/.MOVE" },
+    { label: "iTraxx Main",  val: "~52bp", src: "https://www.ice.com/products/15035413/Markit-iTraxx-Europe" },
+    { label: "iTraxx Xover", val: "~285bp",src: "https://www.ice.com/products/28687613/Markit-iTraxx-Crossover" }
   ],
 
   headlines: [
     {
-      text: "ECB hikes +25bp to 2.25% at June meeting — first increase since 2023 — citing energy cost pass-through from Iran conflict disrupting Strait of Hormuz shipments. Inflation revised up to 3.0% for 2026.",
-      source: "ECB", url: "https://www.ecb.europa.eu", time: "Jun '26"
+      text: "ECB hikes +25bp to 2.25% at June 2026 meeting — first increase since 2023 — citing energy cost pass-through from Iran conflict disrupting Strait of Hormuz shipments. HICP inflation revised up to 3.0% for 2026.",
+      source: "ECB Press Release", url: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260605.en.html", time: "5 Jun '26"
     },
     {
       text: "GS pushes Fed cut forecast to late 2026 / early 2027 — 97% market probability of hold at June 17–18 FOMC. Kevin Warsh chairs first meeting with 'regime change' on inflation discipline framing.",
-      source: "Bloomberg", url: "https://www.bloomberg.com", time: "7 Jun"
+      source: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-06-07/goldman-sachs-no-longer-expects-fed-interest-rate-cut-this-year-mq44uu26", time: "7 Jun"
     },
     {
-      text: "Bund 10Y eases to ~2.98% — markets react to Trump signals of potential US–Iran deal; geopolitical risk premium partially unwound.",
-      source: "TradingEcon", url: "https://tradingeconomics.com/germany/government-bond-yield", time: "12 Jun"
+      text: "Bund 10Y eases to 3.00% — markets react to Trump signals of potential US–Iran deal; geopolitical risk premium partially unwound. Bund yields had hit 3.05% post-ECB hike before fading.",
+      source: "TradingEconomics", url: "https://tradingeconomics.com/germany/government-bond-yield", time: "12 Jun"
     },
     {
-      text: "EUR/USD at 1.1565 — euro supported by ECB–Fed rate differential compression as ECB tightens while Fed holds.",
-      source: "TradingEcon", url: "https://tradingeconomics.com", time: "12 Jun"
+      text: "EUR/USD at 1.1574 — euro supported by ECB–Fed rate differential compression as ECB tightens while Fed holds. EUR/GBP at 0.8632, EUR/JPY at 185.4.",
+      source: "ExchangeRates.org.uk", url: "https://www.exchangerates.org.uk/historical/find-exchange-rate-history-for-12_06_2026", time: "12 Jun"
     },
     {
-      text: "OAT–Bund spread: 69bps. BTP–Bund near multi-year lows (~90bps vs. 251bps peak in Sep 2022) — Italian risk premium sharply compressed.",
-      source: "Bloomberg", url: "https://www.bloomberg.com", time: "12 Jun"
+      text: "BTP–Bund spread at ~73bps — compressed sharply from the 90bps seen in May, aided by Italy's fiscal discipline and ECB PEPP backstop confidence. OAT–Bund at 67bps.",
+      source: "TradingEconomics", url: "https://tradingeconomics.com/italy/government-bond-yield", time: "12 Jun"
     },
     {
-      text: "US 10Y Treasury at 4.49% — 10bps drop on Iran peace deal hopes; highest inflation since 2023 still putting upward pressure on yields.",
-      source: "CNBC", url: "https://www.cnbc.com", time: "12 Jun"
+      text: "US 10Y Treasury at 4.49% — 10bps drop in prior session on Iran peace deal hopes; highest core CPI since 2023 still putting upward pressure on long-end yields.",
+      source: "TradingEconomics", url: "https://tradingeconomics.com/united-states/government-bond-yield", time: "12 Jun"
     },
     {
-      text: "GS expects one further ECB +25bp hike in September before a gradual cutting cycle toward 2% in 2027. ECB sees 3.0% HICP in 2026, 2.3% in 2027.",
-      source: "GS Research", url: "https://www.goldmansachs.com", time: "Jun '26"
+      text: "GS expects one further ECB +25bp hike in September before a gradual cutting cycle toward 2% in 2027. ECB sees 3.0% HICP in 2026, 2.3% in 2027. VIX at 17.68, MOVE at 69.45.",
+      source: "Goldman Sachs Research", url: "https://www.goldmansachs.com/insights/articles/european-central-bank-rate-hike-june-2026.html", time: "Jun '26"
     }
   ],
 
-  /* ── WEEK AHEAD CALENDAR ── */
   calendar: [
     { day: "Mon 16 Jun", today: true, events: [
       { label: "DE WPI (May)", level: "low" },
       { label: "US Empire Mfg (Jun)", level: "low" },
-      { label: "ECB Schnabel speaks", level: "med" }
+      { label: "ECB Schnabel speaks 14:00 CET", level: "med" }
     ]},
     { day: "Tue 17 Jun", today: false, events: [
-      { label: "🔴 FOMC begins (Day 1)", level: "high" },
+      { label: "FOMC begins (Day 1)", level: "high" },
       { label: "US Retail Sales (May)", level: "high" },
       { label: "EUR ZEW Econ Sentiment", level: "med" },
-      { label: "🟣 US 20Y Auction", level: "auction" }
+      { label: "US 20Y Auction", level: "auction" }
     ]},
     { day: "Wed 18 Jun", today: false, events: [
-      { label: "🔴 FOMC Decision 20:00 CET", level: "high" },
-      { label: "🔴 Powell Press Conf 20:30", level: "high" },
-      { label: "EUR CPI Final (May)", level: "med" },
-      { label: "🔴 BoE Decision 13:00 CET", level: "high" }
+      { label: "FOMC Decision 20:00 CET", level: "high" },
+      { label: "Powell Press Conf 20:30 CET", level: "high" },
+      { label: "BoE Decision 13:00 CET", level: "high" },
+      { label: "EUR CPI Final (May)", level: "med" }
     ]},
     { day: "Thu 19 Jun", today: false, events: [
-      { label: "ECB Accts / May Minutes", level: "high" },
+      { label: "ECB Accounts / May Minutes", level: "high" },
       { label: "US Initial Jobless Claims", level: "med" },
       { label: "US Housing Starts (May)", level: "low" },
-      { label: "🟣 DE 10Y Bund Auction", level: "auction" }
+      { label: "DE 10Y Bund Auction", level: "auction" }
     ]},
     { day: "Fri 20 Jun", today: false, events: [
       { label: "DE PPI (May)", level: "low" },
@@ -414,7 +309,6 @@ const DATA = {
     ]}
   ],
 
-  /* ── TRADE IDEA OF THE WEEK ── */
   tradeIdea: {
     updated: "Sun 14 Jun 2026",
     title: "Receive EUR 2Y IRS — Fade ECB terminal pricing",
@@ -423,77 +317,31 @@ const DATA = {
     direction: "RECEIVER (bullish duration)",
     timeHorizon: "3–4 weeks",
     entryLevel: "~2.75% (EUR 2Y swap rate)",
-    target: "2.40% (+35bp P&L in DV01 terms ≈ ~€65k per €10M)",
+    target: "2.40% (+35bp P&L ≈ ~€65k per €10M DV01)",
     stop: "3.05% (30bp stop-loss)",
     rationale: [
-      "ECB at or very near terminal: June hike to 2.25% was potentially the last — market pricing only ~24% probability of a Jul move. When the hiking cycle ends, short-end rates historically rally 50–100bps within 3 months.",
-      "EUR 2Y swap at ~2.75% is pricing in residual tightening risk that is overstated — Germany inflation (2.4% May) is already falling faster than the ECB's own projections, giving the Governing Council room to pause.",
-      "FOMC this week expected to hold again (97% probability), reinforcing a global 'rates peak' narrative. Any dovish Fed tone will drag EUR short-end lower sympathetically.",
-      "Iran geopolitical risk premium is partially unwinding — oil prices easing — which reduces the energy-driven inflation shock that justified June's hike and could bring forward ECB cutting expectations.",
-      "Positioning is short: CFTC and dealer surveys show market still positioned net-short EUR rates. A squeeze into the ECB pause would amplify the move beyond fundamental repricing alone."
+      "ECB at or very near terminal: June hike to 2.25% may be the last — market pricing only ~24% probability of a Jul move. When hiking cycles end, short-end rates historically rally 50–100bps within 3 months.",
+      "EUR 2Y swap at ~2.75% is pricing residual tightening risk that is overstated — Germany CPI at 2.4% (May) is already falling faster than ECB projections, giving the Governing Council room to pause.",
+      "FOMC this week expected to hold again (97% probability), reinforcing a global 'rates peak' narrative. Any dovish Powell tone will drag EUR short-end lower sympathetically via cross-market repricing.",
+      "Iran geopolitical risk premium is unwinding — oil prices easing as US–Iran talks progress — which reduces the energy-driven inflation shock that justified June's hike and could bring forward ECB cutting expectations.",
+      "Positioning squeeze risk: CFTC and dealer surveys show market still positioned net-short EUR rates. A move into ECB pause would amplify the rally beyond fundamental repricing alone."
     ],
-    execution: "Enter: Pay floating / Receive fixed on 2Y EUR IRS at ~2.75% with a €10M notional (DV01 ~€1,850/bp). Alternatively: Long SCHATZ (2Y Bund) futures or buy Sep-26 Euribor futures (ERU6) if swap access limited.",
-    hedges: "Partial hedge via short EUR 5Y IRS to neutralise curve risk if ECB surprises hawkish at Sep meeting; keep net DV01 exposure ~50%.",
-    risks: "Upside risks: ECB Sep hike (GS base case) confirmed early, stronger-than-expected HICP prints, energy shock re-escalation (Iran Hormuz). A 30bp stop-loss limits downside to ~€55k per €10M notional."
+    execution: "Enter: Pay floating / Receive fixed on 2Y EUR IRS at ~2.75% with €10M notional (DV01 ~€1,850/bp). Alternatively via listed markets: Long SCHATZ futures (FGBS) or buy Dec-26 Euribor futures (ERZ6) at equivalent carry.",
+    hedges: "Partial hedge via short EUR 5Y IRS (pay fixed) to neutralise curve risk if ECB surprises hawkish at Sep meeting. Keep net DV01 ~50% of gross position.",
+    risks: "Upside risks: ECB Sep hike confirmed early, stronger-than-expected HICP prints, energy re-escalation (Iran Hormuz). A 30bp stop-loss limits downside to ~€55k per €10M notional."
   },
 
-  /* ── TRADE HISTORY / ARCHIVE ── */
   tradeHistory: [
-    {
-      date: "9 Jun 2026",
-      title: "Long BTP 10Y / Short Bund 10Y (BTP–Bund tightener)",
-      execution: "Cash bonds or BTP vs. Bund CDS 10Y",
-      horizon: "4–6 weeks",
-      entry: "~95bps",
-      target: "80bps",
-      status: "open",
-      statusLabel: "Open"
-    },
-    {
-      date: "2 Jun 2026",
-      title: "Pay EUR 10s30s swap spread steepener",
-      execution: "Pay EUR 30Y IRS / Receive EUR 10Y IRS",
-      horizon: "6–8 weeks",
-      entry: "Spread: +48bps",
-      target: "+65bps",
-      status: "open",
-      statusLabel: "Open"
-    },
-    {
-      date: "19 May 2026",
-      title: "Short Bund 10Y (rate rise post-ECB hike)",
-      execution: "Short Bund futures (RXM6) / Pay EUR 10Y IRS",
-      horizon: "2–3 weeks",
-      entry: "2.85%",
-      target: "3.10%",
-      status: "closed-profit",
-      statusLabel: "+18bp ✓"
-    },
-    {
-      date: "5 May 2026",
-      title: "Receive USD 2Y / Pay EUR 2Y cross-currency basis",
-      execution: "USD 2Y receiver IRS vs. EUR 2Y payer IRS",
-      horizon: "3–4 weeks",
-      entry: "Basis: -28bps",
-      target: "-15bps",
-      status: "expired",
-      statusLabel: "Expired flat"
-    },
-    {
-      date: "21 Apr 2026",
-      title: "Long OAT 10Y (OAT–Bund spread tightener)",
-      execution: "Long OAT Apr 2036 / Short DBR Feb 2036",
-      horizon: "3 weeks",
-      entry: "75bps",
-      target: "60bps",
-      status: "closed-profit",
-      statusLabel: "+12bp ✓"
-    }
+    { date: "9 Jun 2026",  title: "Long BTP 10Y / Short Bund 10Y (BTP–Bund tightener)", execution: "Cash bonds or BTP vs. Bund CDS 10Y", horizon: "4–6 weeks", entry: "~95bps", target: "80bps", status: "open",           statusLabel: "Open"         },
+    { date: "2 Jun 2026",  title: "Pay EUR 10s30s swap spread steepener",               execution: "Pay EUR 30Y IRS / Receive EUR 10Y IRS",    horizon: "6–8 weeks", entry: "+48bps", target: "+65bps",status: "open",           statusLabel: "Open"         },
+    { date: "19 May 2026", title: "Short Bund 10Y (rate rise post-ECB hike)",           execution: "Short Bund futures (FGBL) / Pay EUR 10Y IRS",horizon:"2–3 weeks",entry: "2.85%",  target: "3.10%", status: "closed-profit",  statusLabel: "+18bp ✓"      },
+    { date: "5 May 2026",  title: "Receive USD 2Y / Pay EUR 2Y cross-currency basis",   execution: "USD 2Y receiver IRS vs. EUR 2Y payer IRS", horizon: "3–4 weeks", entry: "-28bps",target: "-15bps",status: "expired",         statusLabel: "Expired flat" },
+    { date: "21 Apr 2026", title: "Long OAT 10Y (OAT–Bund spread tightener)",          execution: "Long OAT Apr 2036 / Short DBR Feb 2036",   horizon: "3 weeks",   entry: "75bps",  target: "60bps", status: "closed-profit",  statusLabel: "+12bp ✓"      }
   ],
 
   gsHouseView: "ECB: Raised deposit rate +25bp to 2.25% in June 2026 (first hike since 2023). GS expects one further +25bp in September before a cutting cycle toward 2% in 2027. Inflation risks skewed up on energy (Iran/Hormuz). Fed: On hold at 3.50–3.75% across three consecutive meetings. GS no longer expects a 2026 cut; first easing pushed to late 2026 / early 2027 as core CPI remains near 3%. BoE: Holding at 3.75%; decision this Wed 18 Jun — widely expected hold. UK wage growth still elevated, keeping MPC cautious. Key risk: sustained oil price spike from Iran conflict delays all central bank pivots simultaneously.",
 
-  sources: "Data: ECB, Federal Reserve, Bank of England, TradingEconomics, Bloomberg, Goldman Sachs Research. Compiled for informational purposes only — not investment advice."
+  sources: "Data: ECB (ecb.europa.eu) · Federal Reserve (federalreserve.gov) · Bank of England (bankofengland.co.uk) · TradingEconomics · ExchangeRates.org.uk · FRED St. Louis Fed · CNBC Markets. Compiled for informational purposes only — not investment advice."
 };
 </script>
 
@@ -508,15 +356,14 @@ const DATA = {
   </div>
   <div class="gs-header-right">
     <div class="last-updated">
-      <div style="opacity:0.5;font-size:9px;letter-spacing:0.5px;">LAST UPDATED</div>
-      <div id="hdr-updated">—</div>
+      <div style="opacity:0.5;font-size:9px;letter-spacing:0.5px;text-transform:uppercase;">Last Updated</div>
+      <strong id="hdr-updated">—</strong>
     </div>
     <div class="refresh-btn">↻ Auto-updated weekdays 6 AM Frankfurt</div>
   </div>
 </header>
 
-<!-- MAIN CONTENT -->
-<div class="main-grid" id="main-grid">
+<div class="main-grid">
 
   <!-- CENTRAL BANKS -->
   <div class="card">
@@ -530,11 +377,11 @@ const DATA = {
     <div class="card-body"><div class="headline-list" id="headline-list"></div></div>
   </div>
 
-  <!-- GOVERNMENT BOND YIELDS -->
+  <!-- BOND YIELDS -->
   <div class="card">
     <div class="card-header">
       <span class="card-title">📊 Government Bond Yields</span>
-      <span class="card-subtitle">yield % · Δ in bps</span>
+      <span class="card-subtitle">yield % · Δ in bps · click for source</span>
     </div>
     <div class="card-body">
       <table class="yield-table">
@@ -546,7 +393,10 @@ const DATA = {
 
   <!-- MONEY MARKETS -->
   <div class="card">
-    <div class="card-header"><span class="card-title">💵 Money Markets</span></div>
+    <div class="card-header">
+      <span class="card-title">💵 Money Markets</span>
+      <span class="card-subtitle">click values for source</span>
+    </div>
     <div class="card-body"><div class="mm-grid" id="mm-grid"></div></div>
   </div>
 
@@ -554,42 +404,42 @@ const DATA = {
   <div class="card full-width">
     <div class="card-header">
       <span class="card-title">🔴 Peripheral Spread Monitor</span>
-      <span class="card-subtitle">vs. 10Y Bund · in basis points</span>
+      <span class="card-subtitle">vs. 10Y Bund · basis points · click for source</span>
     </div>
     <div class="card-body"><div class="spread-grid" id="spread-grid"></div></div>
   </div>
 
-  <!-- BREAKEVENS + FX + VOLATILITY -->
+  <!-- BREAKEVENS + FX + VOL -->
   <div class="three-col">
     <div class="card">
-      <div class="card-header"><span class="card-title">📈 Breakeven Inflation</span></div>
+      <div class="card-header"><span class="card-title">📈 Breakeven Inflation</span><span class="card-subtitle">click for source</span></div>
       <div class="card-body"><div class="bei-grid" id="bei-grid"></div></div>
     </div>
     <div class="card">
-      <div class="card-header"><span class="card-title">💱 FX Rates</span></div>
+      <div class="card-header"><span class="card-title">💱 FX Rates</span><span class="card-subtitle">click for source</span></div>
       <div class="card-body"><div class="fx-grid" id="fx-grid"></div></div>
     </div>
     <div class="card">
-      <div class="card-header"><span class="card-title">📉 Volatility &amp; Credit</span></div>
+      <div class="card-header"><span class="card-title">📉 Volatility &amp; Credit</span><span class="card-subtitle">click for source</span></div>
       <div class="card-body"><div class="vol-grid" id="vol-grid"></div></div>
     </div>
   </div>
 
-  <!-- WEEK AHEAD CALENDAR -->
+  <!-- WEEK AHEAD -->
   <div class="card full-width">
     <div class="card-header">
       <span class="card-title">📅 Week Ahead — Key Events &amp; Catalysts</span>
-      <span class="card-subtitle">🔴 High impact &nbsp;·&nbsp; 🔵 Medium &nbsp;·&nbsp; 🟣 Auction</span>
+      <span class="card-subtitle">🔴 High impact · 🔵 Medium · 🟣 Auction</span>
     </div>
     <div class="card-body"><div class="cal-grid" id="cal-grid"></div></div>
   </div>
 
-  <!-- TRADE IDEA OF THE WEEK -->
-  <div class="trade-card full-width" id="trade-card">
+  <!-- TRADE IDEA -->
+  <div class="trade-card full-width">
     <div class="trade-header">
       <div style="flex:1;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-          <div class="trade-badge">💡 Trade Idea</div>
+          <div class="trade-badge">💡 Trade Idea of the Week</div>
           <div class="trade-meta" id="trade-updated">—</div>
         </div>
         <div class="trade-title" id="trade-title">—</div>
@@ -598,40 +448,28 @@ const DATA = {
       <div class="trade-direction">
         <div class="trade-dir-tag" id="trade-dir">—</div>
         <div class="trade-horizon-tag" id="trade-horizon">—</div>
-        <div style="font-size:9.5px;color:rgba(201,162,39,0.8);margin-top:4px;" id="trade-levels">—</div>
+        <div style="font-size:9.5px;color:rgba(201,162,39,0.8);margin-top:4px;text-align:right;" id="trade-levels">—</div>
       </div>
     </div>
     <div class="trade-body">
       <div class="trade-rationale">
-        <h4>Rationale</h4>
+        <h4>5 Reasons for This Trade</h4>
         <ul class="trade-bullets" id="trade-bullets"></ul>
       </div>
       <div class="trade-execution">
         <h4>Execution</h4>
         <div class="exec-block">
-          <div class="exec-row">
-            <div class="exec-label">Instrument</div>
-            <div class="exec-val" id="exec-instrument">—</div>
-          </div>
-          <div class="exec-row">
-            <div class="exec-label">How to execute</div>
-            <div class="exec-val" id="exec-how">—</div>
-          </div>
-          <div class="exec-row">
-            <div class="exec-label">Hedge / Risk Mgmt</div>
-            <div class="exec-val" id="exec-hedge">—</div>
-          </div>
-          <div class="exec-row">
-            <div class="exec-label">Key risks</div>
-            <div class="exec-val" id="exec-risks">—</div>
-          </div>
+          <div class="exec-row"><div class="exec-label">Instrument</div><div class="exec-val" id="exec-instrument">—</div></div>
+          <div class="exec-row"><div class="exec-label">How to Execute</div><div class="exec-val" id="exec-how">—</div></div>
+          <div class="exec-row"><div class="exec-label">Hedge / Risk Mgmt</div><div class="exec-val" id="exec-hedge">—</div></div>
+          <div class="exec-row"><div class="exec-label">Key Risks</div><div class="exec-val" id="exec-risks">—</div></div>
         </div>
       </div>
     </div>
     <div class="trade-footer">Not investment advice. For educational and informational purposes only. All levels are indicative.</div>
   </div>
 
-  <!-- TRADE HISTORY ARCHIVE -->
+  <!-- TRADE HISTORY -->
   <div class="card full-width">
     <div class="card-header">
       <span class="card-title">🗂 Trade Ideas Archive</span>
@@ -639,76 +477,60 @@ const DATA = {
     </div>
     <div class="card-body" style="overflow-x:auto;">
       <table class="history-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Trade</th>
-            <th>Execution</th>
-            <th>Entry</th>
-            <th>Target</th>
-            <th>Horizon</th>
-            <th>Status</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Date</th><th>Trade</th><th>Execution</th><th>Entry</th><th>Target</th><th>Horizon</th><th>Status</th></tr></thead>
         <tbody id="history-tbody"></tbody>
       </table>
     </div>
   </div>
 
   <!-- GS HOUSE VIEW -->
-  <div class="house-view full-width" id="gs-hv">
+  <div class="house-view full-width">
     <div class="hv-title">Goldman Sachs House View</div>
     <div class="hv-text" id="hv-text">—</div>
   </div>
 
   <!-- SOURCES -->
-  <div style="grid-column:1/-1; padding:4px 0 10px; text-align:center; font-size:10px; color:#94A3B8;" id="sources-el">—</div>
+  <div style="grid-column:1/-1;padding:4px 0 10px;text-align:center;font-size:10px;color:#94A3B8;" id="sources-el">—</div>
 
 </div>
 
-<!-- RENDER SCRIPT -->
 <script>
+  // Helpers
+  function link(val, src, cls) {
+    if (!src) return val;
+    return `<a href="${src}" target="_blank" rel="noopener" class="${cls||'src-link'}">${val}</a>`;
+  }
   function chgClass(chg) {
     if (!chg || chg === '—') return 'chg-flat';
-    const n = parseFloat(chg);
-    return isNaN(n) ? 'chg-flat' : n > 0 ? 'chg-up' : 'chg-dn';
+    const n = parseFloat(chg); return isNaN(n) ? 'chg-flat' : n > 0 ? 'chg-up' : 'chg-dn';
   }
   function chgLabel(chg) {
     if (!chg || chg === '—') return '—';
-    const n = parseFloat(chg);
-    if (isNaN(n)) return chg;
+    const n = parseFloat(chg); if (isNaN(n)) return chg;
     return (n > 0 ? '+' : '') + n + ' bp';
   }
   function fxChgClass(chg) {
     if (!chg || chg === '—') return 'chg-flat';
-    const n = parseFloat(chg);
-    return isNaN(n) ? 'chg-flat' : n > 0 ? 'chg-dn' : 'chg-up';
+    const n = parseFloat(chg); return isNaN(n) ? 'chg-flat' : n > 0 ? 'chg-dn' : 'chg-up';
   }
 
   // Header
-  document.getElementById('hdr-date').textContent = DATA.todayLabel || new Date().toDateString();
-  document.getElementById('hdr-updated').textContent = DATA.lastUpdated || '—';
+  document.getElementById('hdr-date').textContent = DATA.todayLabel;
+  document.getElementById('hdr-updated').textContent = DATA.lastUpdated;
 
   // Central Banks
-  const cbItems = [
-    { key: 'ecb', label: 'ECB' },
-    { key: 'fed', label: 'Federal Reserve' },
-    { key: 'boe', label: 'Bank of England' }
-  ];
-  document.getElementById('cb-grid').innerHTML = cbItems.map(({ key, label }) => {
+  const cbItems = [{key:'ecb',label:'ECB'},{key:'fed',label:'Federal Reserve'},{key:'boe',label:'Bank of England'}];
+  document.getElementById('cb-grid').innerHTML = cbItems.map(({key,label}) => {
     const cb = DATA.centralBanks[key];
     return `<div class="cb-item">
       <div class="cb-label">${label}</div>
-      <div class="cb-rate">${cb.rate}</div>
+      <div class="cb-rate">${link(cb.rate, cb.src)}</div>
       <div class="cb-change">${cb.change}</div>
-      <div class="cb-meta">
-        <div>Next: <strong>${cb.nextMeeting}</strong></div>
-        <div class="cb-next">Mkt: ${cb.pricing}</div>
-      </div>
+      <div class="cb-meta">Next: <strong>${cb.nextMeeting}</strong><div class="cb-next">Mkt: ${cb.pricing}</div></div>
     </div>`;
   }).join('');
 
-  // Headlines
+  // Headlines — full source links
   document.getElementById('headline-list').innerHTML = DATA.headlines.map(h => `
     <div class="headline-item">
       <div class="headline-text">${h.text}</div>
@@ -718,14 +540,15 @@ const DATA = {
       </div>
     </div>`).join('');
 
-  // Government Bond Yields
+  // Bond Yields — each yield is a link
   let rows = '';
   DATA.govtBonds.forEach(country => {
     country.tenors.forEach((t, i) => {
+      const yVal = t.y === '—' ? '<span class="placeholder">—</span>' : link(t.y + '%', t.src);
       rows += `<tr>
         <td class="yt-country">${i === 0 ? country.flag + ' ' + country.label : ''}</td>
         <td class="yt-tenor">${t.t}</td>
-        <td class="yt-yield">${t.y === '—' ? '<span class="placeholder">—</span>' : t.y + '%'}</td>
+        <td class="yt-yield">${yVal}</td>
         <td class="yt-chg ${chgClass(t.chg)}">${chgLabel(t.chg)}</td>
       </tr>`;
     });
@@ -736,7 +559,7 @@ const DATA = {
   document.getElementById('mm-grid').innerHTML = DATA.moneyMarkets.map(m => `
     <div class="mm-item">
       <span class="mm-label">${m.label}</span>
-      <span class="mm-val">${m.val}</span>
+      <span class="mm-val">${link(m.val, m.src)}</span>
     </div>`).join('');
 
   // Spreads
@@ -745,7 +568,7 @@ const DATA = {
     const chgTxt = s.chg === '—' ? '—' : (s.chgDir >= 0 ? '+' : '') + s.chg + ' bp';
     return `<div class="spread-item">
       <div class="spread-label">${s.label}</div>
-      <div><span class="spread-val">${s.val}</span><span class="spread-unit">${s.unit}</span></div>
+      <div>${link(`<span class="spread-val">${s.val}</span><span class="spread-unit">${s.unit}</span>`, s.src)}</div>
       <div class="spread-chg ${chgCls}">${chgTxt}</div>
     </div>`;
   }).join('');
@@ -754,27 +577,27 @@ const DATA = {
   document.getElementById('bei-grid').innerHTML = DATA.breakevens.map(b => `
     <div class="bei-item">
       <span class="bei-label">${b.label}</span>
-      <span class="bei-val">${b.val}</span>
+      <span class="bei-val">${link(b.val, b.src)}</span>
     </div>`).join('');
 
   // FX
   document.getElementById('fx-grid').innerHTML = DATA.fx.map(f => `
     <div class="fx-item">
       <span class="fx-pair">${f.pair}</span>
-      <span class="fx-val">${f.val} <small class="${fxChgClass(f.chg)}" style="font-size:10px;">${f.chg}</small></span>
+      <span class="fx-val">${link(f.val, f.src)} <small class="${fxChgClass(f.chg)}" style="font-size:10px;">${f.chg}</small></span>
     </div>`).join('');
 
   // Volatility
   document.getElementById('vol-grid').innerHTML = DATA.volatility.map(v => `
     <div class="vol-item">
       <span class="vol-label">${v.label}</span>
-      <span class="vol-val">${v.val}</span>
+      <span class="vol-val">${link(v.val, v.src)}</span>
     </div>`).join('');
 
   // Calendar
   document.getElementById('cal-grid').innerHTML = DATA.calendar.map(d => {
     const eventsHtml = d.events.map(e => {
-      if (e.label === '—') return `<div class="cal-event cal-empty">—</div>`;
+      if (!e.label || e.label === '—') return `<div class="cal-event cal-empty">—</div>`;
       let badge = '';
       if (e.level === 'high')    badge = '<span class="cal-impact-badge badge-high">HIGH</span>';
       if (e.level === 'med')     badge = '<span class="cal-impact-badge badge-med">MED</span>';
@@ -795,8 +618,8 @@ const DATA = {
   document.getElementById('trade-dir').textContent = ti.direction || '—';
   document.getElementById('trade-horizon').textContent = '⏱ ' + (ti.timeHorizon || '—');
   document.getElementById('trade-levels').textContent =
-    'Entry: ' + (ti.entryLevel || '—') + ' · Target: ' + (ti.target || '—') + ' · Stop: ' + (ti.stop || '—');
-  document.getElementById('trade-bullets').innerHTML = (ti.rationale || []).map((r, i) =>
+    'Entry: ' + (ti.entryLevel||'—') + ' · Target: ' + (ti.target||'—') + ' · Stop: ' + (ti.stop||'—');
+  document.getElementById('trade-bullets').innerHTML = (ti.rationale||[]).map((r,i) =>
     `<li><strong>${i+1}.</strong> ${r}</li>`).join('');
   document.getElementById('exec-instrument').textContent = ti.instrument || '—';
   document.getElementById('exec-how').textContent = ti.execution || '—';
@@ -804,13 +627,8 @@ const DATA = {
   document.getElementById('exec-risks').textContent = ti.risks || '—';
 
   // Trade History
-  const statusClasses = {
-    'open': 'status-open',
-    'closed-profit': 'status-closed-profit',
-    'closed-loss': 'status-closed-loss',
-    'expired': 'status-expired'
-  };
-  document.getElementById('history-tbody').innerHTML = (DATA.tradeHistory || []).map(h => `
+  const statusClasses = {'open':'status-open','closed-profit':'status-closed-profit','closed-loss':'status-closed-loss','expired':'status-expired'};
+  document.getElementById('history-tbody').innerHTML = (DATA.tradeHistory||[]).map(h => `
     <tr>
       <td class="hist-date">${h.date}</td>
       <td class="hist-title">${h.title}</td>
@@ -818,10 +636,10 @@ const DATA = {
       <td style="font-size:11px;color:#475569;">${h.entry}</td>
       <td style="font-size:11px;color:#475569;">${h.target}</td>
       <td class="hist-horizon">${h.horizon}</td>
-      <td><span class="hist-status ${statusClasses[h.status] || ''}">${h.statusLabel}</span></td>
+      <td><span class="hist-status ${statusClasses[h.status]||''}">${h.statusLabel}</span></td>
     </tr>`).join('');
 
-  // GS House View
+  // House View & Sources
   document.getElementById('hv-text').textContent = DATA.gsHouseView;
   document.getElementById('sources-el').textContent = DATA.sources;
 </script>
