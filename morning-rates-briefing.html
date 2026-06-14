@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GS Rates | Morning Briefing</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: #EEF0F5;
+      color: #1A1A2E;
+      font-size: 13px;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .gs-header {
+      background: linear-gradient(135deg, #0B2D5E 0%, #1A4A8A 100%);
+      color: #fff;
+      padding: 14px 20px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #C9A227;
+    }
+    .gs-header-left { display: flex; align-items: center; gap: 16px; }
+    .gs-logo-block { font-size: 20px; font-weight: 800; letter-spacing: 2px; color: #C9A227; }
+    .gs-header-title { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; opacity: 0.85; text-transform: uppercase; }
+    .gs-header-date { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+    .gs-header-right { display: flex; align-items: center; gap: 12px; }
+    .last-updated { font-size: 10px; opacity: 0.65; text-align: right; }
+    .refresh-btn {
+      background: transparent;
+      color: #C9A227;
+      border: 1px solid rgba(201,162,39,0.5);
+      padding: 5px 14px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: default;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── LAYOUT ── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 14px 16px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .full-width { grid-column: 1 / -1; }
+
+    /* ── CARDS ── */
+    .card {
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .card-header {
+      background: #F8F9FC;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #0B2D5E;
+    }
+    .card-subtitle { font-size: 10px; color: #94A3B8; }
+    .card-body { padding: 12px 14px; }
+
+    /* ── CENTRAL BANKS ── */
+    .cb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .cb-item { text-align: center; padding: 10px 6px; background: #F8F9FC; border-radius: 5px; }
+    .cb-label { font-size: 10px; font-weight: 700; color: #64748B; letter-spacing: 0.8px; margin-bottom: 4px; }
+    .cb-rate { font-size: 22px; font-weight: 800; color: #0B2D5E; margin-bottom: 2px; }
+    .cb-change { font-size: 10px; font-weight: 600; color: #C9A227; margin-bottom: 4px; }
+    .cb-meta { font-size: 9.5px; color: #64748B; line-height: 1.5; }
+    .cb-next { font-size: 9px; color: #94A3B8; margin-top: 2px; }
+
+    /* ── YIELD TABLE ── */
+    .yield-table { width: 100%; border-collapse: collapse; }
+    .yield-table thead th {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #64748B;
+      letter-spacing: 0.7px;
+      text-align: right;
+      padding: 4px 6px;
+      border-bottom: 1px solid #E2E8F0;
+      text-transform: uppercase;
+    }
+    .yield-table thead th:first-child { text-align: left; }
+    .yield-table tbody tr { border-bottom: 1px solid #F1F5F9; }
+    .yield-table tbody tr:last-child { border-bottom: none; }
+    .yield-table tbody td { padding: 5px 6px; text-align: right; vertical-align: middle; }
+    .yield-table tbody td:first-child { text-align: left; }
+    .yt-country { font-weight: 700; font-size: 11px; color: #0B2D5E; }
+    .yt-tenor { font-size: 10px; color: #64748B; }
+    .yt-yield { font-size: 12px; font-weight: 600; color: #1A1A2E; }
+    .yt-chg { font-size: 11px; font-weight: 600; }
+    .chg-up { color: #C0392B; }   /* yield rose = red */
+    .chg-dn { color: #0A7C59; }   /* yield fell = green */
+    .chg-flat { color: #94A3B8; }
+
+    /* ── MONEY MARKETS ── */
+    .mm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .mm-item {
+      background: #F8F9FC;
+      border-radius: 4px;
+      padding: 8px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mm-label { font-size: 10px; font-weight: 700; color: #64748B; }
+    .mm-val { font-size: 13px; font-weight: 700; color: #0B2D5E; }
+
+    /* ── SPREADS ── */
+    .spread-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .spread-item {
+      text-align: center;
+      padding: 10px 8px;
+      background: #F8F9FC;
+      border-radius: 5px;
+      border-top: 3px solid #0B2D5E;
+    }
+    .spread-label { font-size: 9.5px; font-weight: 700; color: #64748B; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .spread-val { font-size: 20px; font-weight: 800; color: #0B2D5E; }
+    .spread-unit { font-size: 10px; color: #94A3B8; margin-left: 2px; }
+    .spread-chg { font-size: 10px; font-weight: 600; margin-top: 4px; }
+
+    /* ── FX ── */
+    .fx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .fx-item {
+      background: #F8F9FC;
+      border-radius: 4px;
+      padding: 8px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .fx-pair { font-size: 10px; font-weight: 700; color: #64748B; }
+    .fx-val { font-size: 13px; font-weight: 700; color: #0B2D5E; }
+
+    /* ── BREAKEVENS ── */
+    .bei-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .bei-item {
+      background: #F8F9FC;
+      border-radius: 4px;
+      padding: 8px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .bei-label { font-size: 10px; font-weight: 700; color: #64748B; }
+    .bei-val { font-size: 13px; font-weight: 700; color: #0B2D5E; }
+
+    /* ── VOLATILITY ── */
+    .vol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .vol-item {
+      background: #F8F9FC;
+      border-radius: 4px;
+      padding: 8px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .vol-label { font-size: 10px; font-weight: 700; color: #64748B; }
+    .vol-val { font-size: 13px; font-weight: 700; color: #0B2D5E; }
+
+    /* ── HEADLINES ── */
+    .headline-list { display: flex; flex-direction: column; gap: 8px; }
+    .headline-item {
+      padding: 8px 10px;
+      border-left: 3px solid #C9A227;
+      background: #FFFDF4;
+      border-radius: 0 4px 4px 0;
+    }
+    .headline-text { font-size: 12px; line-height: 1.5; color: #1A1A2E; margin-bottom: 4px; }
+    .headline-meta { display: flex; align-items: center; gap: 8px; }
+    .headline-source {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #fff;
+      background: #0B2D5E;
+      padding: 1px 6px;
+      border-radius: 3px;
+      text-decoration: none;
+    }
+    .headline-source:hover { background: #1A4A8A; }
+    .headline-time { font-size: 10px; color: #94A3B8; }
+
+    /* ── CALENDAR ── */
+    .cal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .cal-day { }
+    .cal-day-header {
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      background: #0B2D5E;
+      padding: 5px 8px;
+      border-radius: 4px 4px 0 0;
+      text-align: center;
+    }
+    .cal-day-header.today { background: #C9A227; color: #0B2D5E; }
+    .cal-events { background: #F8F9FC; border-radius: 0 0 4px 4px; padding: 6px 8px; min-height: 54px; }
+    .cal-event { font-size: 10.5px; color: #1A1A2E; padding: 2px 0; border-bottom: 1px dotted #E2E8F0; }
+    .cal-event:last-child { border-bottom: none; }
+    .cal-event.high { color: #C0392B; font-weight: 600; }
+    .cal-event.med { color: #0B2D5E; }
+    .cal-empty { font-size: 10px; color: #CBD5E1; font-style: italic; }
+
+    /* ── GS HOUSE VIEW ── */
+    .house-view {
+      background: linear-gradient(135deg, #0B2D5E 0%, #1A4A8A 100%);
+      color: #fff;
+      border-radius: 6px;
+      padding: 14px 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    }
+    .hv-title { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #C9A227; margin-bottom: 8px; }
+    .hv-text { font-size: 12.5px; line-height: 1.7; opacity: 0.92; }
+
+    /* ── LOADING / EMPTY STATES ── */
+    .placeholder { color: #CBD5E1; font-style: italic; }
+
+    /* ── THREE-COL ROW ── */
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; grid-column: 1 / -1; }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .full-width, .three-col { grid-column: 1; }
+      .three-col { grid-template-columns: 1fr; }
+      .cb-grid { grid-template-columns: repeat(3, 1fr); }
+      .spread-grid { grid-template-columns: repeat(2, 1fr); }
+      .cal-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     DATA BLOCK — Updated each morning by scheduled task
+     ════════════════════════════════════════ -->
+<script id="briefing-data">
+const DATA = {
+  lastUpdated: "Sun 14 Jun 2026 — refreshed with latest data",
+  todayLabel: "Monday 16 June 2026",
+
+  centralBanks: {
+    ecb:  { rate: "2.25%", change: "+25bp Jun '26", nextMeeting: "23 Jul 2026", pricing: "~76% hold" },
+    fed:  { rate: "3.50–3.75%", change: "Hold ×3 meetings", nextMeeting: "17–18 Jun 2026", pricing: "97% hold" },
+    boe:  { rate: "3.75%", change: "Hold Apr '26", nextMeeting: "18 Jun 2026", pricing: "Hold expected" }
+  },
+
+  govtBonds: [
+    { flag: "🇩🇪", label: "Germany", tenors: [
+      { t: "2Y", y: "~2.75", chg: "—" },
+      { t: "5Y", y: "~2.85", chg: "—" },
+      { t: "10Y", y: "2.98", chg: "-3" },
+      { t: "30Y", y: "~3.48", chg: "—" }
+    ]},
+    { flag: "🇺🇸", label: "US", tenors: [
+      { t: "2Y", y: "4.09", chg: "—" },
+      { t: "5Y", y: "4.22", chg: "—" },
+      { t: "10Y", y: "4.49", chg: "-10" },
+      { t: "30Y", y: "4.97", chg: "—" }
+    ]},
+    { flag: "🇬🇧", label: "UK",     tenors: [{ t: "10Y", y: "4.79", chg: "—" }] },
+    { flag: "🇫🇷", label: "France", tenors: [{ t: "10Y", y: "3.67", chg: "—" }] },
+    { flag: "🇮🇹", label: "Italy",  tenors: [{ t: "10Y", y: "~3.88", chg: "—" }] },
+    { flag: "🇪🇸", label: "Spain",  tenors: [{ t: "10Y", y: "3.48", chg: "—" }] }
+  ],
+
+  moneyMarkets: [
+    { label: "€STR",       val: "~2.15%" },
+    { label: "EURIBOR 3M", val: "~2.38%" },
+    { label: "EURIBOR 6M", val: "~2.45%" },
+    { label: "SOFR",       val: "~3.55%" },
+    { label: "SONIA",      val: "~4.45%" },
+    { label: "CHF SARON",  val: "—"      }
+  ],
+
+  spreads: [
+    { label: "BTP–Bund 10Y",   val: "~90",  unit: "bps", chg: "—",  chgDir: 0  },
+    { label: "OAT–Bund 10Y",   val: "69",   unit: "bps", chg: "-2", chgDir: -1 },
+    { label: "Bonos–Bund 10Y", val: "~50",  unit: "bps", chg: "—",  chgDir: 0  },
+    { label: "EUR ASW 10Y",    val: "—",    unit: "bps", chg: "—",  chgDir: 0  }
+  ],
+
+  fx: [
+    { pair: "EUR/USD", val: "1.1565", chg: "-0.07%" },
+    { pair: "EUR/GBP", val: "0.8628", chg: "—" },
+    { pair: "EUR/CHF", val: "0.9204", chg: "—" },
+    { pair: "EUR/JPY", val: "~184.5", chg: "—" }
+  ],
+
+  breakevens: [
+    { label: "EUR 5Y5Y BEI", val: "—" },
+    { label: "EUR 10Y BEI",  val: "—" },
+    { label: "US 5Y5Y BEI",  val: "—" },
+    { label: "US 10Y BEI",   val: "—" }
+  ],
+
+  volatility: [
+    { label: "VIX",          val: "—" },
+    { label: "MOVE Index",   val: "—" },
+    { label: "iTraxx Main",  val: "—" },
+    { label: "iTraxx Xover", val: "—" }
+  ],
+
+  headlines: [
+    {
+      text: "ECB hikes +25bp to 2.25% at June meeting — first increase since 2023 — citing energy cost pass-through from Iran conflict disrupting Strait of Hormuz shipments. Inflation revised up to 3.0% for 2026.",
+      source: "ECB",
+      url: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260430~81b7179e6f.en.html",
+      time: "Jun '26"
+    },
+    {
+      text: "GS pushes Fed cut forecast to late 2026 / early 2027 — 97% market probability of hold at June 17–18 FOMC. Kevin Warsh chairs first meeting this month with 'regime change' on inflation discipline framing.",
+      source: "Bloomberg",
+      url: "https://www.bloomberg.com/news/articles/2026-06-07/goldman-sachs-no-longer-expects-fed-interest-rate-cut-this-year-mq44uu26",
+      time: "7 Jun"
+    },
+    {
+      text: "Bund 10Y eases to ~3.00% — markets react to Trump signals of potential US–Iran deal; geopolitical risk premium partially unwound.",
+      source: "TradingEcon",
+      url: "https://tradingeconomics.com/germany/government-bond-yield",
+      time: "12 Jun"
+    },
+    {
+      text: "EUR/USD at 1.1565 — euro supported by ECB–Fed rate differential compression as ECB tightens while Fed holds.",
+      source: "TradingEcon",
+      url: "https://tradingeconomics.com/euro-area/currency",
+      time: "12 Jun"
+    },
+    {
+      text: "OAT–Bund spread: 69bps. BTP–Bund near multi-year lows (~90bps vs. 251bps peak in Sep 2022) — Italian risk premium sharply compressed.",
+      source: "ideal-invest",
+      url: "https://www.ideal-investisseur.fr/en/markets/oat-bund-spread.html",
+      time: "22 May"
+    },
+    {
+      text: "US 10Y Treasury at 4.49% — 10bps drop in prior session on Iran peace deal hopes; highest inflation since 2023 still putting upward pressure on yields.",
+      source: "CNBC",
+      url: "https://www.cnbc.com/amp/2026/06/10/us-treasury-yields-inflation-data.html",
+      time: "12 Jun"
+    },
+    {
+      text: "GS expects one further ECB +25bp hike in September before a gradual cutting cycle toward 2% in 2027. ECB sees 3.0% HICP in 2026, 2.3% in 2027.",
+      source: "GS Research",
+      url: "https://beincrypto.com/ecb-rate-hike-fed-fomc-june-2026/",
+      time: "Jun '26"
+    }
+  ],
+
+  calendar: [
+    { day: "Mon 16 Jun", today: false, events: [
+      { label: "—", level: "low" }
+    ]},
+    { day: "Tue 17 Jun", today: false, events: [
+      { label: "FOMC begins (Day 1)", level: "high" },
+      { label: "US Retail Sales (May)", level: "med" }
+    ]},
+    { day: "Wed 18 Jun", today: false, events: [
+      { label: "FOMC Decision + Press Conf", level: "high" },
+      { label: "EUR CPI Final (May)", level: "med" }
+    ]},
+    { day: "Thu 19 Jun", today: false, events: [
+      { label: "ECB Minutes (May meeting)", level: "med" },
+      { label: "US Jobless Claims", level: "med" },
+      { label: "US Housing Starts", level: "low" }
+    ]},
+    { day: "Fri 20 Jun", today: false, events: [
+      { label: "DE PPI (May)", level: "low" },
+      { label: "EUR Current Account", level: "low" }
+    ]}
+  ],
+
+  gsHouseView: "ECB: Raised deposit rate +25bp to 2.25% in June 2026 (first hike since 2023). GS expects one further +25bp in September before a cutting cycle toward 2% in 2027. Inflation risks skewed up on energy (Iran/Hormuz). Fed: On hold at 3.50–3.75% across three consecutive meetings. GS no longer expects a 2026 cut; pushes first easing to late 2026 / early 2027 as core CPI remains near 3%. Key risk: sustained oil price spike from Iran conflict delays both central bank pivots.",
+
+  sources: "Data: ECB, Federal Reserve, TradingEconomics, Bloomberg, Goldman Sachs Research. Compiled by Claude (Anthropic) for informational purposes only. Not investment advice."
+};
+</script>
+
+<!-- ════════════════════════════════════════
+     HEADER
+     ════════════════════════════════════════ -->
+<header class="gs-header">
+  <div class="gs-header-left">
+    <div class="gs-logo-block">GS</div>
+    <div>
+      <div class="gs-header-title">Rates &amp; Macro · Morning Briefing</div>
+      <div class="gs-header-date" id="hdr-date">—</div>
+    </div>
+  </div>
+  <div class="gs-header-right">
+    <div class="last-updated">
+      <div style="opacity:0.5;font-size:9px;letter-spacing:0.5px;">LAST UPDATED</div>
+      <div id="hdr-updated">—</div>
+    </div>
+    <div class="refresh-btn">↻ Auto-updated weekdays 6 AM Frankfurt</div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════
+     MAIN CONTENT
+     ════════════════════════════════════════ -->
+<div class="main-grid" id="main-grid">
+
+  <!-- ── CENTRAL BANKS ── -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">🏦 Central Banks</span>
+    </div>
+    <div class="card-body">
+      <div class="cb-grid" id="cb-grid"></div>
+    </div>
+  </div>
+
+  <!-- ── OVERNIGHT HEADLINES ── -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">📰 Overnight Headlines</span>
+    </div>
+    <div class="card-body">
+      <div class="headline-list" id="headline-list"></div>
+    </div>
+  </div>
+
+  <!-- ── GOVERNMENT BOND YIELDS ── -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">📊 Government Bond Yields</span>
+      <span class="card-subtitle">yield % · Δ in bps</span>
+    </div>
+    <div class="card-body">
+      <table class="yield-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Country</th>
+            <th>Tenor</th>
+            <th>Yield</th>
+            <th>Δ 1D</th>
+          </tr>
+        </thead>
+        <tbody id="yield-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── MONEY MARKETS ── -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">💵 Money Markets</span>
+    </div>
+    <div class="card-body">
+      <div class="mm-grid" id="mm-grid"></div>
+    </div>
+  </div>
+
+  <!-- ── SPREAD MONITOR (full width) ── -->
+  <div class="card full-width">
+    <div class="card-header">
+      <span class="card-title">🔴 Peripheral Spread Monitor</span>
+      <span class="card-subtitle">vs. 10Y Bund · in basis points</span>
+    </div>
+    <div class="card-body">
+      <div class="spread-grid" id="spread-grid"></div>
+    </div>
+  </div>
+
+  <!-- ── BREAKEVENS + FX + VOLATILITY (three-col) ── -->
+  <div class="three-col">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">📈 Breakeven Inflation</span>
+      </div>
+      <div class="card-body">
+        <div class="bei-grid" id="bei-grid"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">💱 FX Rates</span>
+      </div>
+      <div class="card-body">
+        <div class="fx-grid" id="fx-grid"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">📉 Volatility &amp; Credit</span>
+      </div>
+      <div class="card-body">
+        <div class="vol-grid" id="vol-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WEEK AHEAD CALENDAR (full width) ── -->
+  <div class="card full-width">
+    <div class="card-header">
+      <span class="card-title">📅 Week Ahead Calendar</span>
+    </div>
+    <div class="card-body">
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+  </div>
+
+  <!-- ── GS HOUSE VIEW (full width) ── -->
+  <div class="house-view full-width" id="gs-hv">
+    <div class="hv-title">Goldman Sachs House View</div>
+    <div class="hv-text" id="hv-text">—</div>
+  </div>
+
+  <!-- ── SOURCES ── -->
+  <div style="grid-column:1/-1; padding: 4px 0 10px; text-align:center; font-size:10px; color:#94A3B8;" id="sources-el">—</div>
+
+</div><!-- /main-grid -->
+
+<!-- ════════════════════════════════════════
+     RENDER SCRIPT
+     ════════════════════════════════════════ -->
+<script>
+  // ── Helpers ──
+  function chgClass(chg) {
+    if (!chg || chg === '—') return 'chg-flat';
+    const n = parseFloat(chg);
+    if (isNaN(n)) return 'chg-flat';
+    return n > 0 ? 'chg-up' : 'chg-dn';
+  }
+  function chgLabel(chg) {
+    if (!chg || chg === '—') return '—';
+    const n = parseFloat(chg);
+    if (isNaN(n)) return chg;
+    return (n > 0 ? '+' : '') + n + ' bp';
+  }
+  function fxChgClass(chg) {
+    if (!chg || chg === '—') return 'chg-flat';
+    const n = parseFloat(chg);
+    if (isNaN(n)) return 'chg-flat';
+    return n > 0 ? 'chg-dn' : 'chg-up'; // EUR/USD: EUR up = good
+  }
+
+  // ── Header ──
+  document.getElementById('hdr-date').textContent = DATA.todayLabel || new Date().toDateString();
+  document.getElementById('hdr-updated').textContent = DATA.lastUpdated || '—';
+
+  // ── Central Banks ──
+  const cbGrid = document.getElementById('cb-grid');
+  const cbItems = [
+    { key: 'ecb', label: 'ECB' },
+    { key: 'fed', label: 'Federal Reserve' },
+    { key: 'boe', label: 'Bank of England' }
+  ];
+  cbGrid.innerHTML = cbItems.map(({ key, label }) => {
+    const cb = DATA.centralBanks[key];
+    return `
+      <div class="cb-item">
+        <div class="cb-label">${label}</div>
+        <div class="cb-rate">${cb.rate}</div>
+        <div class="cb-change">${cb.change}</div>
+        <div class="cb-meta">
+          <div>Next: <strong>${cb.nextMeeting}</strong></div>
+          <div class="cb-next">Mkt: ${cb.pricing}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // ── Headlines ──
+  const hlList = document.getElementById('headline-list');
+  hlList.innerHTML = DATA.headlines.map(h => `
+    <div class="headline-item">
+      <div class="headline-text">${h.text}</div>
+      <div class="headline-meta">
+        <a class="headline-source" href="${h.url}" target="_blank" rel="noopener">${h.source}</a>
+        <span class="headline-time">${h.time}</span>
+      </div>
+    </div>
+  `).join('');
+
+  // ── Government Bond Yields ──
+  const tbody = document.getElementById('yield-tbody');
+  let rows = '';
+  DATA.govtBonds.forEach(country => {
+    country.tenors.forEach((t, i) => {
+      const isFirst = i === 0;
+      rows += `
+        <tr>
+          <td class="yt-country">${isFirst ? country.flag + ' ' + country.label : ''}</td>
+          <td class="yt-tenor">${t.t}</td>
+          <td class="yt-yield">${t.y === '—' ? '<span class="placeholder">—</span>' : t.y + '%'}</td>
+          <td class="yt-chg ${chgClass(t.chg)}">${chgLabel(t.chg)}</td>
+        </tr>
+      `;
+    });
+  });
+  tbody.innerHTML = rows;
+
+  // ── Money Markets ──
+  document.getElementById('mm-grid').innerHTML = DATA.moneyMarkets.map(m => `
+    <div class="mm-item">
+      <span class="mm-label">${m.label}</span>
+      <span class="mm-val">${m.val}</span>
+    </div>
+  `).join('');
+
+  // ── Spreads ──
+  document.getElementById('spread-grid').innerHTML = DATA.spreads.map(s => {
+    const chgCls = s.chgDir < 0 ? 'chg-dn' : s.chgDir > 0 ? 'chg-up' : 'chg-flat';
+    const chgTxt = s.chg === '—' ? '—' : (s.chgDir >= 0 ? '+' : '') + s.chg + ' bp';
+    return `
+      <div class="spread-item">
+        <div class="spread-label">${s.label}</div>
+        <div>
+          <span class="spread-val">${s.val}</span>
+          <span class="spread-unit">${s.unit}</span>
+        </div>
+        <div class="spread-chg ${chgCls}">${chgTxt}</div>
+      </div>
+    `;
+  }).join('');
+
+  // ── Breakevens ──
+  document.getElementById('bei-grid').innerHTML = DATA.breakevens.map(b => `
+    <div class="bei-item">
+      <span class="bei-label">${b.label}</span>
+      <span class="bei-val">${b.val}</span>
+    </div>
+  `).join('');
+
+  // ── FX ──
+  document.getElementById('fx-grid').innerHTML = DATA.fx.map(f => `
+    <div class="fx-item">
+      <span class="fx-pair">${f.pair}</span>
+      <span class="fx-val">${f.val} <small class="${fxChgClass(f.chg)}" style="font-size:10px;">${f.chg}</small></span>
+    </div>
+  `).join('');
+
+  // ── Volatility ──
+  document.getElementById('vol-grid').innerHTML = DATA.volatility.map(v => `
+    <div class="vol-item">
+      <span class="vol-label">${v.label}</span>
+      <span class="vol-val">${v.val}</span>
+    </div>
+  `).join('');
+
+  // ── Calendar ──
+  document.getElementById('cal-grid').innerHTML = DATA.calendar.map(d => {
+    const eventsHtml = d.events.map(e => {
+      if (e.label === '—') return `<div class="cal-event cal-empty">No data releases</div>`;
+      return `<div class="cal-event ${e.level}">${e.label}</div>`;
+    }).join('');
+    return `
+      <div class="cal-day">
+        <div class="cal-day-header ${d.today ? 'today' : ''}">${d.day}</div>
+        <div class="cal-events">${eventsHtml}</div>
+      </div>
+    `;
+  }).join('');
+
+  // ── GS House View ──
+  document.getElementById('hv-text').textContent = DATA.gsHouseView;
+
+  // ── Sources ──
+  document.getElementById('sources-el').textContent = DATA.sources;
+
+  // Public page — no dynamic refresh needed; page is regenerated server-side each morning.
+</script>
+
+</body>
+</html>
