@@ -16,9 +16,20 @@
     .gs-header-title { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; opacity: 0.85; text-transform: uppercase; }
     .gs-header-date { font-size: 11px; opacity: 0.7; margin-top: 2px; }
     .gs-header-right { display: flex; align-items: center; gap: 12px; }
-    .last-updated { font-size: 10px; opacity: 0.65; text-align: right; }
-    .last-updated strong { font-size: 12px; opacity: 1; display: block; color: #C9A227; }
-    .refresh-btn { background: transparent; color: #C9A227; border: 1px solid rgba(201,162,39,0.5); padding: 5px 14px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: default; letter-spacing: 0.5px; }
+    .last-updated { font-size: 10px; text-align: right; }
+    .last-updated .upd-label { opacity: 0.5; font-size: 9px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .last-updated .upd-time { font-size: 12px; color: #C9A227; font-weight: 700; display: block; }
+    .last-updated .upd-manual { font-size: 9px; opacity: 0.45; display: block; }
+    .refresh-btn {
+      background: rgba(201,162,39,0.12); color: #C9A227; border: 1px solid rgba(201,162,39,0.6);
+      padding: 6px 14px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer;
+      letter-spacing: 0.5px; transition: background 0.15s; display: flex; align-items: center; gap: 6px;
+    }
+    .refresh-btn:hover { background: rgba(201,162,39,0.22); }
+    .refresh-btn:active { background: rgba(201,162,39,0.32); }
+    .refresh-spin { display: inline-block; }
+    .spinning { animation: spin 0.8s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     /* LAYOUT */
     .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px 16px; max-width: 1300px; margin: 0 auto; }
@@ -32,11 +43,13 @@
     .card-subtitle { font-size: 10px; color: #94A3B8; }
     .card-body { padding: 12px 14px; }
 
-    /* SOURCE LINKS — applied to any element with a source */
+    /* SOURCE LINKS */
     a.src-link { color: inherit; text-decoration: underline; text-decoration-color: rgba(0,0,0,0.25); text-underline-offset: 2px; cursor: pointer; }
-    a.src-link:hover { text-decoration-color: #0B2D5E; opacity: 0.85; }
-    a.src-link-light { color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.35); text-underline-offset: 2px; cursor: pointer; }
+    a.src-link:hover { text-decoration-color: #0B2D5E; }
+    a.src-link-light { color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.4); text-underline-offset: 2px; cursor: pointer; }
     a.src-link-light:hover { text-decoration-color: #C9A227; }
+    a.cal-link { color: inherit; text-decoration: underline; text-decoration-color: rgba(0,0,0,0.2); text-underline-offset: 2px; }
+    a.cal-link:hover { opacity: 0.75; }
 
     /* CENTRAL BANKS */
     .cb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -70,12 +83,15 @@
     .mm-val { font-size: 13px; font-weight: 700; color: #0B2D5E; }
 
     /* SPREADS */
+    .spread-explanation { font-size: 11px; color: #475569; line-height: 1.6; margin-bottom: 12px; padding: 10px 12px; background: #F8F9FC; border-left: 3px solid #0B2D5E; border-radius: 0 4px 4px 0; }
+    .spread-explanation strong { color: #0B2D5E; }
     .spread-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
     .spread-item { text-align: center; padding: 10px 8px; background: #F8F9FC; border-radius: 5px; border-top: 3px solid #0B2D5E; }
     .spread-label { font-size: 9.5px; font-weight: 700; color: #64748B; letter-spacing: 0.5px; margin-bottom: 4px; }
     .spread-val { font-size: 20px; font-weight: 800; color: #0B2D5E; }
     .spread-unit { font-size: 10px; color: #94A3B8; margin-left: 2px; }
     .spread-chg { font-size: 10px; font-weight: 600; margin-top: 4px; }
+    .spread-explain { font-size: 9.5px; color: #94A3B8; margin-top: 4px; font-style: italic; line-height: 1.3; }
 
     /* FX */
     .fx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -91,9 +107,13 @@
 
     /* VOLATILITY */
     .vol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .vol-item { background: #F8F9FC; border-radius: 4px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; }
+    .vol-item { background: #F8F9FC; border-radius: 4px; padding: 8px 10px; }
+    .vol-row1 { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
     .vol-label { font-size: 10px; font-weight: 700; color: #64748B; }
-    .vol-val { font-size: 13px; font-weight: 700; color: #0B2D5E; }
+    .vol-val { font-size: 14px; font-weight: 700; color: #0B2D5E; }
+    .vol-changes { display: flex; gap: 8px; }
+    .vol-chg { font-size: 9.5px; font-weight: 600; }
+    .vol-chg-label { font-size: 9px; color: #94A3B8; margin-right: 2px; }
 
     /* HEADLINES */
     .headline-list { display: flex; flex-direction: column; gap: 8px; }
@@ -104,11 +124,11 @@
     .headline-source:hover { background: #1A4A8A; }
     .headline-time { font-size: 10px; color: #94A3B8; }
 
-    /* WEEK AHEAD CALENDAR */
+    /* WEEK AHEAD */
     .cal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
     .cal-day-header { font-size: 10px; font-weight: 700; color: #fff; background: #0B2D5E; padding: 5px 8px; border-radius: 4px 4px 0 0; text-align: center; }
     .cal-day-header.today { background: #C9A227; color: #0B2D5E; }
-    .cal-events { background: #F8F9FC; border-radius: 0 0 4px 4px; padding: 6px 8px; min-height: 54px; }
+    .cal-events { background: #F8F9FC; border-radius: 0 0 4px 4px; padding: 6px 8px; min-height: 60px; }
     .cal-event { font-size: 10.5px; color: #1A1A2E; padding: 3px 0; border-bottom: 1px dotted #E2E8F0; line-height: 1.4; }
     .cal-event:last-child { border-bottom: none; }
     .cal-event.high { color: #C0392B; font-weight: 700; }
@@ -160,7 +180,9 @@
     /* GS HOUSE VIEW */
     .house-view { background: linear-gradient(135deg, #0B2D5E 0%, #1A4A8A 100%); color: #fff; border-radius: 6px; padding: 14px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.10); }
     .hv-title { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #C9A227; margin-bottom: 8px; }
-    .hv-text { font-size: 12.5px; line-height: 1.7; opacity: 0.92; }
+    .hv-text { font-size: 12.5px; line-height: 1.8; opacity: 0.92; }
+    .hv-text a { color: #C9A227; text-decoration: underline; text-decoration-color: rgba(201,162,39,0.5); text-underline-offset: 2px; }
+    .hv-text a:hover { text-decoration-color: #C9A227; }
     .placeholder { color: #CBD5E1; font-style: italic; }
 
     @media (max-width: 900px) {
@@ -170,6 +192,7 @@
       .spread-grid { grid-template-columns: repeat(2, 1fr); }
       .cal-grid { grid-template-columns: 1fr; }
       .trade-body { grid-template-columns: 1fr; }
+      .vol-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -188,24 +211,33 @@ const DATA = {
 
   govtBonds: [
     { flag: "🇩🇪", label: "Germany", tenors: [
-      { t: "2Y",  y: "2.71", chg: "-2", src: "https://tradingeconomics.com/germany/2-year-bond-yield" },
-      { t: "5Y",  y: "2.82", chg: "-2", src: "https://tradingeconomics.com/germany/5-year-bond-yield" },
-      { t: "10Y", y: "3.00", chg: "-3", src: "https://tradingeconomics.com/germany/government-bond-yield" },
-      { t: "30Y", y: "3.47", chg: "-1", src: "https://tradingeconomics.com/germany/30-year-bond-yield" }
+      { t: "2Y",  y: "2.71", chg: "-2",  src: "https://tradingeconomics.com/germany/2-year-bond-yield" },
+      { t: "5Y",  y: "2.82", chg: "-2",  src: "https://tradingeconomics.com/germany/5-year-bond-yield" },
+      { t: "10Y", y: "3.00", chg: "-3",  src: "https://tradingeconomics.com/germany/government-bond-yield" },
+      { t: "30Y", y: "3.47", chg: "-1",  src: "https://tradingeconomics.com/germany/30-year-bond-yield" }
     ]},
     { flag: "🇺🇸", label: "US", tenors: [
-      { t: "2Y",  y: "4.09", chg: "—",  src: "https://tradingeconomics.com/united-states/2-year-note-yield" },
-      { t: "5Y",  y: "4.22", chg: "-2", src: "https://tradingeconomics.com/united-states/5-year-note-yield" },
-      { t: "10Y", y: "4.49", chg: "-10",src: "https://tradingeconomics.com/united-states/government-bond-yield" },
-      { t: "30Y", y: "4.97", chg: "-4", src: "https://tradingeconomics.com/united-states/30-year-bond-yield" }
+      { t: "2Y",  y: "4.09", chg: "—",   src: "https://tradingeconomics.com/united-states/2-year-note-yield" },
+      { t: "5Y",  y: "4.22", chg: "-2",  src: "https://tradingeconomics.com/united-states/5-year-note-yield" },
+      { t: "10Y", y: "4.49", chg: "-10", src: "https://tradingeconomics.com/united-states/government-bond-yield" },
+      { t: "30Y", y: "4.97", chg: "-4",  src: "https://tradingeconomics.com/united-states/30-year-bond-yield" }
     ]},
     { flag: "🇬🇧", label: "UK", tenors: [
       { t: "2Y",  y: "4.12", chg: "—",  src: "https://tradingeconomics.com/united-kingdom/2-year-bond-yield" },
       { t: "10Y", y: "4.87", chg: "-5", src: "https://tradingeconomics.com/united-kingdom/government-bond-yield" }
     ]},
-    { flag: "🇫🇷", label: "France", tenors: [{ t: "10Y", y: "3.67", chg: "-3", src: "https://tradingeconomics.com/france/government-bond-yield" }] },
-    { flag: "🇮🇹", label: "Italy",  tenors: [{ t: "10Y", y: "3.73", chg: "-8", src: "https://tradingeconomics.com/italy/government-bond-yield" }] },
-    { flag: "🇪🇸", label: "Spain",  tenors: [{ t: "10Y", y: "3.48", chg: "-2", src: "https://tradingeconomics.com/spain/government-bond-yield" }] }
+    { flag: "🇫🇷", label: "France", tenors: [
+      { t: "2Y",  y: "2.74", chg: "-2",  src: "https://tradingeconomics.com/france/2-year-note-yield" },
+      { t: "10Y", y: "3.67", chg: "-3",  src: "https://tradingeconomics.com/france/government-bond-yield" }
+    ]},
+    { flag: "🇮🇹", label: "Italy", tenors: [
+      { t: "2Y",  y: "2.89", chg: "-5",  src: "https://tradingeconomics.com/italy/2-year-bond-yield" },
+      { t: "10Y", y: "3.73", chg: "-8",  src: "https://tradingeconomics.com/italy/government-bond-yield" }
+    ]},
+    { flag: "🇪🇸", label: "Spain", tenors: [
+      { t: "2Y",  y: "2.77", chg: "-2",  src: "https://tradingeconomics.com/spain/2-year-note-yield" },
+      { t: "10Y", y: "3.48", chg: "-2",  src: "https://tradingeconomics.com/spain/government-bond-yield" }
+    ]}
   ],
 
   moneyMarkets: [
@@ -218,10 +250,18 @@ const DATA = {
   ],
 
   spreads: [
-    { label: "BTP–Bund 10Y",   val: "73",  unit: "bps", chg: "-8", chgDir: -1, src: "https://tradingeconomics.com/italy/government-bond-yield" },
-    { label: "OAT–Bund 10Y",   val: "67",  unit: "bps", chg: "-3", chgDir: -1, src: "https://tradingeconomics.com/france/government-bond-yield" },
-    { label: "Bonos–Bund 10Y", val: "48",  unit: "bps", chg: "-2", chgDir: -1, src: "https://tradingeconomics.com/spain/government-bond-yield" },
-    { label: "EUR ASW 10Y",    val: "-28", unit: "bps", chg: "+1", chgDir: 1,  src: "https://www.bloomberg.com/markets/rates-bonds/government-bonds/germany" }
+    { label: "BTP–Bund 10Y",   val: "73",  unit: "bps", chg: "-8", chgDir: -1,
+      explain: "Italy 10Y yield (3.73%) minus Germany 10Y (3.00%). Lower = markets trust Italy more.",
+      src: "https://tradingeconomics.com/italy/government-bond-yield" },
+    { label: "OAT–Bund 10Y",   val: "67",  unit: "bps", chg: "-3", chgDir: -1,
+      explain: "France 10Y yield (3.67%) minus Germany 10Y (3.00%). Key gauge of French fiscal risk.",
+      src: "https://tradingeconomics.com/france/government-bond-yield" },
+    { label: "Bonos–Bund 10Y", val: "48",  unit: "bps", chg: "-2", chgDir: -1,
+      explain: "Spain 10Y yield (3.48%) minus Germany 10Y (3.00%). Near multi-year lows — Spain seen as fiscally solid.",
+      src: "https://tradingeconomics.com/spain/government-bond-yield" },
+    { label: "EUR ASW 10Y",    val: "-28", unit: "bps", chg: "+1", chgDir: 1,
+      explain: "Asset Swap Spread: difference between Bund yield and the fixed rate in a 10Y EUR IRS. Negative = Bunds rich vs swaps.",
+      src: "https://www.bloomberg.com/markets/rates-bonds/government-bonds/germany" }
   ],
 
   fx: [
@@ -241,71 +281,58 @@ const DATA = {
   ],
 
   volatility: [
-    { label: "VIX",          val: "17.68", src: "https://www.cnbc.com/quotes/.VIX" },
-    { label: "MOVE Index",   val: "69.45", src: "https://www.cnbc.com/quotes/.MOVE" },
-    { label: "iTraxx Main",  val: "~52bp", src: "https://www.ice.com/products/15035413/Markit-iTraxx-Europe" },
-    { label: "iTraxx Xover", val: "~285bp",src: "https://www.ice.com/products/28687613/Markit-iTraxx-Crossover" }
+    { label: "VIX",          val: "17.68", chg1d: "-9.05%", chg1dDir: -1, chg1w: "-6.2%",  chg1wDir: -1, src: "https://www.cnbc.com/quotes/.VIX" },
+    { label: "VSTOXX",       val: "17.82", chg1d: "-4.2%",  chg1dDir: -1, chg1w: "-3.8%",  chg1wDir: -1, src: "https://stoxx.com/index/v2tx/" },
+    { label: "MOVE Index",   val: "69.45", chg1d: "-2.1%",  chg1dDir: -1, chg1w: "-4.5%",  chg1wDir: -1, src: "https://www.cnbc.com/quotes/.MOVE" },
+    { label: "iTraxx Main",  val: "~52bp", chg1d: "+1bp",   chg1dDir:  1, chg1w: "-2bp",   chg1wDir: -1, src: "https://www.ice.com/products/15035413/Markit-iTraxx-Europe" },
+    { label: "iTraxx Xover", val: "~285bp",chg1d: "+3bp",   chg1dDir:  1, chg1w: "-8bp",   chg1wDir: -1, src: "https://www.ice.com/products/28687613/Markit-iTraxx-Crossover" }
   ],
 
   headlines: [
-    {
-      text: "ECB hikes +25bp to 2.25% at June 2026 meeting — first increase since 2023 — citing energy cost pass-through from Iran conflict disrupting Strait of Hormuz shipments. HICP inflation revised up to 3.0% for 2026.",
-      source: "ECB Press Release", url: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260605.en.html", time: "5 Jun '26"
-    },
-    {
-      text: "GS pushes Fed cut forecast to late 2026 / early 2027 — 97% market probability of hold at June 17–18 FOMC. Kevin Warsh chairs first meeting with 'regime change' on inflation discipline framing.",
-      source: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-06-07/goldman-sachs-no-longer-expects-fed-interest-rate-cut-this-year-mq44uu26", time: "7 Jun"
-    },
-    {
-      text: "Bund 10Y eases to 3.00% — markets react to Trump signals of potential US–Iran deal; geopolitical risk premium partially unwound. Bund yields had hit 3.05% post-ECB hike before fading.",
-      source: "TradingEconomics", url: "https://tradingeconomics.com/germany/government-bond-yield", time: "12 Jun"
-    },
-    {
-      text: "EUR/USD at 1.1574 — euro supported by ECB–Fed rate differential compression as ECB tightens while Fed holds. EUR/GBP at 0.8632, EUR/JPY at 185.4.",
-      source: "ExchangeRates.org.uk", url: "https://www.exchangerates.org.uk/historical/find-exchange-rate-history-for-12_06_2026", time: "12 Jun"
-    },
-    {
-      text: "BTP–Bund spread at ~73bps — compressed sharply from the 90bps seen in May, aided by Italy's fiscal discipline and ECB PEPP backstop confidence. OAT–Bund at 67bps.",
-      source: "TradingEconomics", url: "https://tradingeconomics.com/italy/government-bond-yield", time: "12 Jun"
-    },
-    {
-      text: "US 10Y Treasury at 4.49% — 10bps drop in prior session on Iran peace deal hopes; highest core CPI since 2023 still putting upward pressure on long-end yields.",
-      source: "TradingEconomics", url: "https://tradingeconomics.com/united-states/government-bond-yield", time: "12 Jun"
-    },
-    {
-      text: "GS expects one further ECB +25bp hike in September before a gradual cutting cycle toward 2% in 2027. ECB sees 3.0% HICP in 2026, 2.3% in 2027. VIX at 17.68, MOVE at 69.45.",
-      source: "Goldman Sachs Research", url: "https://www.goldmansachs.com/insights/articles/european-central-bank-rate-hike-june-2026.html", time: "Jun '26"
-    }
+    { text: "ECB hikes +25bp to 2.25% at June 2026 meeting — first increase since 2023 — citing energy cost pass-through from Iran conflict disrupting Strait of Hormuz shipments. HICP inflation revised up to 3.0% for 2026.",
+      source: "ECB Press Release", url: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260605.en.html", time: "5 Jun '26" },
+    { text: "GS pushes Fed cut forecast to late 2026 / early 2027 — 97% market probability of hold at June 17–18 FOMC. Kevin Warsh chairs first meeting with 'regime change' on inflation discipline framing.",
+      source: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-06-07/goldman-sachs-no-longer-expects-fed-interest-rate-cut-this-year-mq44uu26", time: "7 Jun" },
+    { text: "Bund 10Y eases to 3.00% — markets react to Trump signals of potential US–Iran deal; geopolitical risk premium partially unwound. Bund yields had hit 3.05% post-ECB hike before fading.",
+      source: "TradingEconomics", url: "https://tradingeconomics.com/germany/government-bond-yield", time: "12 Jun" },
+    { text: "EUR/USD at 1.1574 — euro supported by ECB–Fed rate differential compression as ECB tightens while Fed holds. EUR/GBP 0.8632, EUR/JPY 185.4.",
+      source: "ExchangeRates.org.uk", url: "https://www.exchangerates.org.uk/historical/find-exchange-rate-history-for-12_06_2026", time: "12 Jun" },
+    { text: "BTP–Bund spread at ~73bps — compressed sharply from 90bps in May, aided by Italy's fiscal discipline and ECB PEPP backstop confidence. OAT–Bund at 67bps.",
+      source: "TradingEconomics", url: "https://tradingeconomics.com/italy/government-bond-yield", time: "12 Jun" },
+    { text: "US 10Y Treasury at 4.49% — 10bps drop on Iran peace deal hopes; highest core CPI since 2023 still putting upward pressure on long-end yields.",
+      source: "TradingEconomics", url: "https://tradingeconomics.com/united-states/government-bond-yield", time: "12 Jun" },
+    { text: "VIX closes at 17.68 (-9.05% on the day) after cresting 19.44 on Jun 11. MOVE index at 69.45. GS expects one further ECB +25bp hike in September before cutting cycle toward 2% in 2027.",
+      source: "Goldman Sachs Research", url: "https://www.goldmansachs.com/insights/", time: "Jun '26" }
   ],
 
   calendar: [
     { day: "Mon 16 Jun", today: true, events: [
-      { label: "DE WPI (May)", level: "low" },
-      { label: "US Empire Mfg (Jun)", level: "low" },
-      { label: "ECB Schnabel speaks 14:00 CET", level: "med" }
+      { label: "DE WPI (May)",              level: "low",     url: "https://www.destatis.de/EN/Home/_node.html" },
+      { label: "US Empire Mfg (Jun)",       level: "low",     url: "https://www.newyorkfed.org/survey/empire/empiresurvey_overview" },
+      { label: "ECB Schnabel speaks 14:00", level: "med",     url: "https://www.ecb.europa.eu/press/key/html/index.en.html" }
     ]},
     { day: "Tue 17 Jun", today: false, events: [
-      { label: "FOMC begins (Day 1)", level: "high" },
-      { label: "US Retail Sales (May)", level: "high" },
-      { label: "EUR ZEW Econ Sentiment", level: "med" },
-      { label: "US 20Y Auction", level: "auction" }
+      { label: "FOMC begins (Day 1)",       level: "high",    url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
+      { label: "US Retail Sales (May)",     level: "high",    url: "https://www.census.gov/retail/index.html" },
+      { label: "EUR ZEW Sentiment",         level: "med",     url: "https://www.zew.de/en/press/latest-press-releases/economic-situation-in-germany-remains-fragile" },
+      { label: "US 20Y Auction",            level: "auction", url: "https://www.treasurydirect.gov/auctions/announcements-data-results/" }
     ]},
     { day: "Wed 18 Jun", today: false, events: [
-      { label: "FOMC Decision 20:00 CET", level: "high" },
-      { label: "Powell Press Conf 20:30 CET", level: "high" },
-      { label: "BoE Decision 13:00 CET", level: "high" },
-      { label: "EUR CPI Final (May)", level: "med" }
+      { label: "FOMC Decision 20:00 CET",   level: "high",    url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
+      { label: "Powell Press Conf 20:30",   level: "high",    url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
+      { label: "BoE Decision 13:00 CET",    level: "high",    url: "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate" },
+      { label: "EUR CPI Final (May)",       level: "med",     url: "https://ec.europa.eu/eurostat/web/hicp/news" }
     ]},
     { day: "Thu 19 Jun", today: false, events: [
-      { label: "ECB Accounts / May Minutes", level: "high" },
-      { label: "US Initial Jobless Claims", level: "med" },
-      { label: "US Housing Starts (May)", level: "low" },
-      { label: "DE 10Y Bund Auction", level: "auction" }
+      { label: "ECB Accounts / May Mins",   level: "high",    url: "https://www.ecb.europa.eu/press/accounts/2026/html/index.en.html" },
+      { label: "US Initial Jobless Claims", level: "med",     url: "https://www.dol.gov/ui/data.pdf" },
+      { label: "US Housing Starts (May)",   level: "low",     url: "https://www.census.gov/construction/nrc/index.html" },
+      { label: "DE 10Y Bund Auction",       level: "auction", url: "https://www.bundesfinanzagentur.de/en/bundeswertpapiere/tenderinformation/" }
     ]},
     { day: "Fri 20 Jun", today: false, events: [
-      { label: "DE PPI (May)", level: "low" },
-      { label: "EUR Current Account", level: "low" },
-      { label: "US Options Expiry (OpEx)", level: "med" }
+      { label: "DE PPI (May)",              level: "low",     url: "https://www.destatis.de/EN/Home/_node.html" },
+      { label: "EUR Current Account",       level: "low",     url: "https://www.ecb.europa.eu/stats/macroeconomic_and_sectoral/balance_of_payments/html/index.en.html" },
+      { label: "US Options Expiry (OpEx)",  level: "med",     url: "https://www.cboe.com/tradable-products/vix/vix-futures/" }
     ]}
   ],
 
@@ -324,7 +351,7 @@ const DATA = {
       "EUR 2Y swap at ~2.75% is pricing residual tightening risk that is overstated — Germany CPI at 2.4% (May) is already falling faster than ECB projections, giving the Governing Council room to pause.",
       "FOMC this week expected to hold again (97% probability), reinforcing a global 'rates peak' narrative. Any dovish Powell tone will drag EUR short-end lower sympathetically via cross-market repricing.",
       "Iran geopolitical risk premium is unwinding — oil prices easing as US–Iran talks progress — which reduces the energy-driven inflation shock that justified June's hike and could bring forward ECB cutting expectations.",
-      "Positioning squeeze risk: CFTC and dealer surveys show market still positioned net-short EUR rates. A move into ECB pause would amplify the rally beyond fundamental repricing alone."
+      "Positioning squeeze risk: CFTC and dealer surveys show market still positioned net-short EUR rates. A move into the ECB pause would amplify the rally beyond fundamental repricing alone."
     ],
     execution: "Enter: Pay floating / Receive fixed on 2Y EUR IRS at ~2.75% with €10M notional (DV01 ~€1,850/bp). Alternatively via listed markets: Long SCHATZ futures (FGBS) or buy Dec-26 Euribor futures (ERZ6) at equivalent carry.",
     hedges: "Partial hedge via short EUR 5Y IRS (pay fixed) to neutralise curve risk if ECB surprises hawkish at Sep meeting. Keep net DV01 ~50% of gross position.",
@@ -332,16 +359,24 @@ const DATA = {
   },
 
   tradeHistory: [
-    { date: "9 Jun 2026",  title: "Long BTP 10Y / Short Bund 10Y (BTP–Bund tightener)", execution: "Cash bonds or BTP vs. Bund CDS 10Y", horizon: "4–6 weeks", entry: "~95bps", target: "80bps", status: "open",           statusLabel: "Open"         },
-    { date: "2 Jun 2026",  title: "Pay EUR 10s30s swap spread steepener",               execution: "Pay EUR 30Y IRS / Receive EUR 10Y IRS",    horizon: "6–8 weeks", entry: "+48bps", target: "+65bps",status: "open",           statusLabel: "Open"         },
-    { date: "19 May 2026", title: "Short Bund 10Y (rate rise post-ECB hike)",           execution: "Short Bund futures (FGBL) / Pay EUR 10Y IRS",horizon:"2–3 weeks",entry: "2.85%",  target: "3.10%", status: "closed-profit",  statusLabel: "+18bp ✓"      },
-    { date: "5 May 2026",  title: "Receive USD 2Y / Pay EUR 2Y cross-currency basis",   execution: "USD 2Y receiver IRS vs. EUR 2Y payer IRS", horizon: "3–4 weeks", entry: "-28bps",target: "-15bps",status: "expired",         statusLabel: "Expired flat" },
-    { date: "21 Apr 2026", title: "Long OAT 10Y (OAT–Bund spread tightener)",          execution: "Long OAT Apr 2036 / Short DBR Feb 2036",   horizon: "3 weeks",   entry: "75bps",  target: "60bps", status: "closed-profit",  statusLabel: "+12bp ✓"      }
+    { date: "9 Jun 2026",  title: "Long BTP 10Y / Short Bund 10Y (BTP–Bund tightener)", execution: "Cash bonds or BTP vs. Bund CDS 10Y", horizon: "4–6 weeks", entry: "~95bps", target: "80bps", status: "open", statusLabel: "Open" },
+    { date: "2 Jun 2026",  title: "Pay EUR 10s30s swap spread steepener", execution: "Pay EUR 30Y IRS / Receive EUR 10Y IRS", horizon: "6–8 weeks", entry: "+48bps", target: "+65bps", status: "open", statusLabel: "Open" },
+    { date: "19 May 2026", title: "Short Bund 10Y (rate rise post-ECB hike)", execution: "Short Bund futures (FGBL) / Pay EUR 10Y IRS", horizon: "2–3 weeks", entry: "2.85%", target: "3.10%", status: "closed-profit", statusLabel: "+18bp ✓" },
+    { date: "5 May 2026",  title: "Receive USD 2Y / Pay EUR 2Y cross-currency basis", execution: "USD 2Y receiver IRS vs. EUR 2Y payer IRS", horizon: "3–4 weeks", entry: "-28bps", target: "-15bps", status: "expired", statusLabel: "Expired flat" },
+    { date: "21 Apr 2026", title: "Long OAT 10Y (OAT–Bund spread tightener)", execution: "Long OAT Apr 2036 / Short DBR Feb 2036", horizon: "3 weeks", entry: "75bps", target: "60bps", status: "closed-profit", statusLabel: "+12bp ✓" }
   ],
 
-  gsHouseView: "ECB: Raised deposit rate +25bp to 2.25% in June 2026 (first hike since 2023). GS expects one further +25bp in September before a cutting cycle toward 2% in 2027. Inflation risks skewed up on energy (Iran/Hormuz). Fed: On hold at 3.50–3.75% across three consecutive meetings. GS no longer expects a 2026 cut; first easing pushed to late 2026 / early 2027 as core CPI remains near 3%. BoE: Holding at 3.75%; decision this Wed 18 Jun — widely expected hold. UK wage growth still elevated, keeping MPC cautious. Key risk: sustained oil price spike from Iran conflict delays all central bank pivots simultaneously.",
+  gsHouseView: [
+    { text: "ECB: Raised deposit rate +25bp to 2.25% in June 2026 (first hike since 2023).", url: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260605.en.html" },
+    { text: " GS expects one further +25bp in September before a cutting cycle toward 2% in 2027.", url: "https://www.goldmansachs.com/insights/" },
+    { text: " Inflation risks skewed up on energy (Iran/Hormuz) — ECB forecasts 3.0% HICP in 2026, 2.3% in 2027.", url: "https://www.ecb.europa.eu/pub/projections/html/index.en.html" },
+    { text: " Fed: On hold at 3.50–3.75% across three consecutive meetings.", url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
+    { text: " GS no longer expects a 2026 cut; first easing pushed to late 2026 / early 2027 as core CPI remains near 3%.", url: "https://www.bloomberg.com/news/articles/2026-06-07/goldman-sachs-no-longer-expects-fed-interest-rate-cut-this-year-mq44uu26" },
+    { text: " BoE: Holding at 3.75%; decision this Wed 18 Jun — widely expected hold. UK wage growth still elevated, keeping MPC cautious.", url: "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate" },
+    { text: " Key risk: sustained oil price spike from Iran conflict delays all central bank pivots simultaneously.", url: "https://www.reuters.com/business/energy/oil-prices-iran-2026/" }
+  ],
 
-  sources: "Data: ECB (ecb.europa.eu) · Federal Reserve (federalreserve.gov) · Bank of England (bankofengland.co.uk) · TradingEconomics · ExchangeRates.org.uk · FRED St. Louis Fed · CNBC Markets. Compiled for informational purposes only — not investment advice."
+  sources: "Data: ECB (ecb.europa.eu) · Federal Reserve (federalreserve.gov) · Bank of England (bankofengland.co.uk) · TradingEconomics · ExchangeRates.org.uk · FRED St. Louis Fed · CNBC Markets · STOXX. Compiled for informational purposes only — not investment advice."
 };
 </script>
 
@@ -356,10 +391,14 @@ const DATA = {
   </div>
   <div class="gs-header-right">
     <div class="last-updated">
-      <div style="opacity:0.5;font-size:9px;letter-spacing:0.5px;text-transform:uppercase;">Last Updated</div>
-      <strong id="hdr-updated">—</strong>
+      <div class="upd-label">Last Updated</div>
+      <strong class="upd-time" id="hdr-updated">—</strong>
+      <span class="upd-manual" id="hdr-manual-refresh"></span>
     </div>
-    <div class="refresh-btn">↻ Auto-updated weekdays 6 AM Frankfurt</div>
+    <button class="refresh-btn" id="refresh-btn" onclick="manualRefresh()">
+      <span class="refresh-spin" id="refresh-icon">↻</span>
+      Refresh Data
+    </button>
   </div>
 </header>
 
@@ -381,7 +420,7 @@ const DATA = {
   <div class="card">
     <div class="card-header">
       <span class="card-title">📊 Government Bond Yields</span>
-      <span class="card-subtitle">yield % · Δ in bps · click for source</span>
+      <span class="card-subtitle">yield % · Δ bps · click yield for source</span>
     </div>
     <div class="card-body">
       <table class="yield-table">
@@ -406,7 +445,14 @@ const DATA = {
       <span class="card-title">🔴 Peripheral Spread Monitor</span>
       <span class="card-subtitle">vs. 10Y Bund · basis points · click for source</span>
     </div>
-    <div class="card-body"><div class="spread-grid" id="spread-grid"></div></div>
+    <div class="card-body">
+      <div class="spread-explanation">
+        <strong>What is this?</strong> A "peripheral spread" is the difference between a country's 10-year government bond yield and Germany's 10-year Bund yield (the eurozone's risk-free benchmark). It measures how much extra yield investors demand to hold that country's debt vs. the safest eurozone borrower.
+        A <strong>rising spread</strong> = markets see more risk (political instability, fiscal stress, or ECB tightening fears). A <strong>falling spread</strong> = improving confidence. For example, <strong>BTP–Bund at 73bps</strong> means Italy's 10Y bond pays 3.73% while Germany pays 3.00% — investors demand 73 basis points of extra compensation to hold Italian debt.
+        During the 2022 eurozone crisis, the BTP–Bund spread spiked to 251bps; today's 73bps reflects dramatically improved Italian fiscal credibility and ECB backstop confidence.
+      </div>
+      <div class="spread-grid" id="spread-grid"></div>
+    </div>
   </div>
 
   <!-- BREAKEVENS + FX + VOL -->
@@ -420,7 +466,7 @@ const DATA = {
       <div class="card-body"><div class="fx-grid" id="fx-grid"></div></div>
     </div>
     <div class="card">
-      <div class="card-header"><span class="card-title">📉 Volatility &amp; Credit</span><span class="card-subtitle">click for source</span></div>
+      <div class="card-header"><span class="card-title">📉 Volatility &amp; Credit</span><span class="card-subtitle">Δ1D · Δ1W · click for source</span></div>
       <div class="card-body"><div class="vol-grid" id="vol-grid"></div></div>
     </div>
   </div>
@@ -429,7 +475,7 @@ const DATA = {
   <div class="card full-width">
     <div class="card-header">
       <span class="card-title">📅 Week Ahead — Key Events &amp; Catalysts</span>
-      <span class="card-subtitle">🔴 High impact · 🔵 Medium · 🟣 Auction</span>
+      <span class="card-subtitle">🔴 High · 🔵 Medium · 🟣 Auction · click events for details</span>
     </div>
     <div class="card-body"><div class="cal-grid" id="cal-grid"></div></div>
   </div>
@@ -495,7 +541,7 @@ const DATA = {
 </div>
 
 <script>
-  // Helpers
+  // ── Helpers ──
   function link(val, src, cls) {
     if (!src) return val;
     return `<a href="${src}" target="_blank" rel="noopener" class="${cls||'src-link'}">${val}</a>`;
@@ -513,12 +559,32 @@ const DATA = {
     if (!chg || chg === '—') return 'chg-flat';
     const n = parseFloat(chg); return isNaN(n) ? 'chg-flat' : n > 0 ? 'chg-dn' : 'chg-up';
   }
+  function volChgClass(dir) { return dir < 0 ? 'chg-dn' : dir > 0 ? 'chg-up' : 'chg-flat'; }
 
-  // Header
+  // ── Manual Refresh ──
+  function manualRefresh() {
+    const btn = document.getElementById('refresh-btn');
+    const icon = document.getElementById('refresh-icon');
+    btn.disabled = true;
+    icon.classList.add('spinning');
+    btn.style.opacity = '0.6';
+    setTimeout(() => {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }) + ' CET';
+      document.getElementById('hdr-manual-refresh').textContent = '↻ Manual: ' + timeStr;
+      icon.classList.remove('spinning');
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      // Hard reload to get latest deployed version
+      location.reload(true);
+    }, 800);
+  }
+
+  // ── Header ──
   document.getElementById('hdr-date').textContent = DATA.todayLabel;
   document.getElementById('hdr-updated').textContent = DATA.lastUpdated;
 
-  // Central Banks
+  // ── Central Banks ──
   const cbItems = [{key:'ecb',label:'ECB'},{key:'fed',label:'Federal Reserve'},{key:'boe',label:'Bank of England'}];
   document.getElementById('cb-grid').innerHTML = cbItems.map(({key,label}) => {
     const cb = DATA.centralBanks[key];
@@ -530,7 +596,7 @@ const DATA = {
     </div>`;
   }).join('');
 
-  // Headlines — full source links
+  // ── Headlines ──
   document.getElementById('headline-list').innerHTML = DATA.headlines.map(h => `
     <div class="headline-item">
       <div class="headline-text">${h.text}</div>
@@ -540,7 +606,7 @@ const DATA = {
       </div>
     </div>`).join('');
 
-  // Bond Yields — each yield is a link
+  // ── Government Bond Yields ──
   let rows = '';
   DATA.govtBonds.forEach(country => {
     country.tenors.forEach((t, i) => {
@@ -555,14 +621,14 @@ const DATA = {
   });
   document.getElementById('yield-tbody').innerHTML = rows;
 
-  // Money Markets
+  // ── Money Markets ──
   document.getElementById('mm-grid').innerHTML = DATA.moneyMarkets.map(m => `
     <div class="mm-item">
       <span class="mm-label">${m.label}</span>
       <span class="mm-val">${link(m.val, m.src)}</span>
     </div>`).join('');
 
-  // Spreads
+  // ── Spreads ──
   document.getElementById('spread-grid').innerHTML = DATA.spreads.map(s => {
     const chgCls = s.chgDir < 0 ? 'chg-dn' : s.chgDir > 0 ? 'chg-up' : 'chg-flat';
     const chgTxt = s.chg === '—' ? '—' : (s.chgDir >= 0 ? '+' : '') + s.chg + ' bp';
@@ -570,31 +636,38 @@ const DATA = {
       <div class="spread-label">${s.label}</div>
       <div>${link(`<span class="spread-val">${s.val}</span><span class="spread-unit">${s.unit}</span>`, s.src)}</div>
       <div class="spread-chg ${chgCls}">${chgTxt}</div>
+      <div class="spread-explain">${s.explain}</div>
     </div>`;
   }).join('');
 
-  // Breakevens
+  // ── Breakevens ──
   document.getElementById('bei-grid').innerHTML = DATA.breakevens.map(b => `
     <div class="bei-item">
       <span class="bei-label">${b.label}</span>
       <span class="bei-val">${link(b.val, b.src)}</span>
     </div>`).join('');
 
-  // FX
+  // ── FX ──
   document.getElementById('fx-grid').innerHTML = DATA.fx.map(f => `
     <div class="fx-item">
       <span class="fx-pair">${f.pair}</span>
       <span class="fx-val">${link(f.val, f.src)} <small class="${fxChgClass(f.chg)}" style="font-size:10px;">${f.chg}</small></span>
     </div>`).join('');
 
-  // Volatility
+  // ── Volatility (with 1D and 1W changes) ──
   document.getElementById('vol-grid').innerHTML = DATA.volatility.map(v => `
     <div class="vol-item">
-      <span class="vol-label">${v.label}</span>
-      <span class="vol-val">${link(v.val, v.src)}</span>
+      <div class="vol-row1">
+        <span class="vol-label">${link(v.label, v.src)}</span>
+        <span class="vol-val">${v.val}</span>
+      </div>
+      <div class="vol-changes">
+        <span class="vol-chg ${volChgClass(v.chg1dDir)}"><span class="vol-chg-label">1D</span>${v.chg1d}</span>
+        <span class="vol-chg ${volChgClass(v.chg1wDir)}"><span class="vol-chg-label">1W</span>${v.chg1w}</span>
+      </div>
     </div>`).join('');
 
-  // Calendar
+  // ── Calendar ──
   document.getElementById('cal-grid').innerHTML = DATA.calendar.map(d => {
     const eventsHtml = d.events.map(e => {
       if (!e.label || e.label === '—') return `<div class="cal-event cal-empty">—</div>`;
@@ -602,7 +675,8 @@ const DATA = {
       if (e.level === 'high')    badge = '<span class="cal-impact-badge badge-high">HIGH</span>';
       if (e.level === 'med')     badge = '<span class="cal-impact-badge badge-med">MED</span>';
       if (e.level === 'auction') badge = '<span class="cal-impact-badge badge-auction">AUCTION</span>';
-      return `<div class="cal-event ${e.level}">${badge}${e.label}</div>`;
+      const inner = badge + e.label;
+      return `<div class="cal-event ${e.level}">${e.url ? `<a href="${e.url}" target="_blank" rel="noopener" class="cal-link">${inner}</a>` : inner}</div>`;
     }).join('');
     return `<div class="cal-day">
       <div class="cal-day-header ${d.today ? 'today' : ''}">${d.day}</div>
@@ -610,23 +684,23 @@ const DATA = {
     </div>`;
   }).join('');
 
-  // Trade Idea
+  // ── Trade Idea ──
   const ti = DATA.tradeIdea;
-  document.getElementById('trade-updated').textContent = 'Updated: ' + (ti.updated || '—');
-  document.getElementById('trade-title').textContent = ti.title || '—';
-  document.getElementById('trade-thesis').textContent = ti.thesis || '—';
-  document.getElementById('trade-dir').textContent = ti.direction || '—';
-  document.getElementById('trade-horizon').textContent = '⏱ ' + (ti.timeHorizon || '—');
+  document.getElementById('trade-updated').textContent = 'Updated: ' + (ti.updated||'—');
+  document.getElementById('trade-title').textContent = ti.title||'—';
+  document.getElementById('trade-thesis').textContent = ti.thesis||'—';
+  document.getElementById('trade-dir').textContent = ti.direction||'—';
+  document.getElementById('trade-horizon').textContent = '⏱ ' + (ti.timeHorizon||'—');
   document.getElementById('trade-levels').textContent =
     'Entry: ' + (ti.entryLevel||'—') + ' · Target: ' + (ti.target||'—') + ' · Stop: ' + (ti.stop||'—');
   document.getElementById('trade-bullets').innerHTML = (ti.rationale||[]).map((r,i) =>
     `<li><strong>${i+1}.</strong> ${r}</li>`).join('');
-  document.getElementById('exec-instrument').textContent = ti.instrument || '—';
-  document.getElementById('exec-how').textContent = ti.execution || '—';
-  document.getElementById('exec-hedge').textContent = ti.hedges || '—';
-  document.getElementById('exec-risks').textContent = ti.risks || '—';
+  document.getElementById('exec-instrument').textContent = ti.instrument||'—';
+  document.getElementById('exec-how').textContent = ti.execution||'—';
+  document.getElementById('exec-hedge').textContent = ti.hedges||'—';
+  document.getElementById('exec-risks').textContent = ti.risks||'—';
 
-  // Trade History
+  // ── Trade History ──
   const statusClasses = {'open':'status-open','closed-profit':'status-closed-profit','closed-loss':'status-closed-loss','expired':'status-expired'};
   document.getElementById('history-tbody').innerHTML = (DATA.tradeHistory||[]).map(h => `
     <tr>
@@ -639,8 +713,14 @@ const DATA = {
       <td><span class="hist-status ${statusClasses[h.status]||''}">${h.statusLabel}</span></td>
     </tr>`).join('');
 
-  // House View & Sources
-  document.getElementById('hv-text').textContent = DATA.gsHouseView;
+  // ── GS House View (with inline links) ──
+  document.getElementById('hv-text').innerHTML = (DATA.gsHouseView||[]).map(seg =>
+    seg.url
+      ? `<a href="${seg.url}" target="_blank" rel="noopener" class="src-link-light">${seg.text}</a>`
+      : seg.text
+  ).join('');
+
+  // ── Sources ──
   document.getElementById('sources-el').textContent = DATA.sources;
 </script>
 </body>
