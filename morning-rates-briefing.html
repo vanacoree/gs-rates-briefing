@@ -200,183 +200,372 @@
 
 <script id="briefing-data">
 const DATA = {
-  lastUpdated: "Sun 14 Jun 2026, 09:47 CET",
-  todayLabel: "Monday 16 June 2026",
+  "lastUpdated": "Sun 14 Jun 2026, 21:10 CEST",
+  "todayLabel": "Sunday 14 June 2026",
 
-  centralBanks: {
-    ecb:  { rate: "2.25%", change: "+25bp Jun '26", nextMeeting: "23 Jul 2026", pricing: "~76% hold", src: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260605.en.html" },
-    fed:  { rate: "3.50–3.75%", change: "Hold ×3 meetings", nextMeeting: "17–18 Jun 2026", pricing: "97% hold", src: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
-    boe:  { rate: "3.75%", change: "Hold Apr '26", nextMeeting: "18 Jun 2026", pricing: "Hold expected", src: "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate" }
+  "centralBanks": {
+    "ecb": {
+      "rate": "2.25%",
+      "change": "+25bp Jun '26",
+      "nextMeeting": "23 Jul 2026",
+      "pricing": "~76% hold",
+      "src": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260611.en.html"
+    },
+    "fed": {
+      "rate": "3.50–3.75%",
+      "change": "Hold ×4 meetings",
+      "nextMeeting": "16–17 Jun 2026",
+      "pricing": "~97% hold",
+      "src": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    "boe": {
+      "rate": "3.75%",
+      "change": "Hold Apr '26",
+      "nextMeeting": "18 Jun 2026",
+      "pricing": "Hold expected",
+      "src": "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate"
+    }
   },
 
-  govtBonds: [
-    { flag: "🇩🇪", label: "Germany", tenors: [
-      { t: "2Y",  y: "2.71", chg: "-2",  src: "https://tradingeconomics.com/germany/2-year-bond-yield" },
-      { t: "5Y",  y: "2.82", chg: "-2",  src: "https://tradingeconomics.com/germany/5-year-bond-yield" },
-      { t: "10Y", y: "3.00", chg: "-3",  src: "https://tradingeconomics.com/germany/government-bond-yield" },
-      { t: "30Y", y: "3.47", chg: "-1",  src: "https://tradingeconomics.com/germany/30-year-bond-yield" }
-    ]},
-    { flag: "🇺🇸", label: "US", tenors: [
-      { t: "2Y",  y: "4.09", chg: "—",   src: "https://tradingeconomics.com/united-states/2-year-note-yield" },
-      { t: "5Y",  y: "4.22", chg: "-2",  src: "https://tradingeconomics.com/united-states/5-year-note-yield" },
-      { t: "10Y", y: "4.49", chg: "-10", src: "https://tradingeconomics.com/united-states/government-bond-yield" },
-      { t: "30Y", y: "4.97", chg: "-4",  src: "https://tradingeconomics.com/united-states/30-year-bond-yield" }
-    ]},
-    { flag: "🇬🇧", label: "UK", tenors: [
-      { t: "2Y",  y: "4.12", chg: "—",  src: "https://tradingeconomics.com/united-kingdom/2-year-bond-yield" },
-      { t: "10Y", y: "4.87", chg: "-5", src: "https://tradingeconomics.com/united-kingdom/government-bond-yield" }
-    ]},
-    { flag: "🇫🇷", label: "France", tenors: [
-      { t: "2Y",  y: "2.74", chg: "-2",  src: "https://tradingeconomics.com/france/2-year-note-yield" },
-      { t: "10Y", y: "3.67", chg: "-3",  src: "https://tradingeconomics.com/france/government-bond-yield" }
-    ]},
-    { flag: "🇮🇹", label: "Italy", tenors: [
-      { t: "2Y",  y: "2.89", chg: "-5",  src: "https://tradingeconomics.com/italy/2-year-bond-yield" },
-      { t: "10Y", y: "3.73", chg: "-8",  src: "https://tradingeconomics.com/italy/government-bond-yield" }
-    ]},
-    { flag: "🇪🇸", label: "Spain", tenors: [
-      { t: "2Y",  y: "2.77", chg: "-2",  src: "https://tradingeconomics.com/spain/2-year-note-yield" },
-      { t: "10Y", y: "3.48", chg: "-2",  src: "https://tradingeconomics.com/spain/government-bond-yield" }
-    ]}
+  "govtBonds": [
+    {
+      "flag": "🇩🇪",
+      "label": "Germany",
+      "tenors": [
+        { "t": "2Y",  "y": "2.68", "chg": "-3",  "src": "https://tradingeconomics.com/germany/2-year-note-yield" },
+        { "t": "5Y",  "y": "2.78", "chg": "-3",  "src": "https://tradingeconomics.com/germany/5-year-bond-yield" },
+        { "t": "10Y", "y": "2.97", "chg": "-3",  "src": "https://tradingeconomics.com/germany/government-bond-yield" },
+        { "t": "30Y", "y": "3.44", "chg": "-3",  "src": "https://tradingeconomics.com/germany/30-year-bond-yield" }
+      ]
+    },
+    {
+      "flag": "🇺🇸",
+      "label": "US",
+      "tenors": [
+        { "t": "2Y",  "y": "4.09", "chg": "—",   "src": "https://tradingeconomics.com/united-states/2-year-note-yield" },
+        { "t": "5Y",  "y": "4.22", "chg": "—",   "src": "https://tradingeconomics.com/united-states/5-year-note-yield" },
+        { "t": "10Y", "y": "4.49", "chg": "+1",  "src": "https://tradingeconomics.com/united-states/government-bond-yield" },
+        { "t": "30Y", "y": "4.97", "chg": "—",   "src": "https://tradingeconomics.com/united-states/30-year-bond-yield" }
+      ]
+    },
+    {
+      "flag": "🇬🇧",
+      "label": "UK",
+      "tenors": [
+        { "t": "2Y",  "y": "4.08", "chg": "-4",  "src": "https://tradingeconomics.com/united-kingdom/2-year-note-yield" },
+        { "t": "10Y", "y": "4.79", "chg": "-8",  "src": "https://tradingeconomics.com/united-kingdom/government-bond-yield" }
+      ]
+    },
+    {
+      "flag": "🇫🇷",
+      "label": "France",
+      "tenors": [
+        { "t": "2Y",  "y": "2.71", "chg": "-3",  "src": "https://tradingeconomics.com/france/2-year-note-yield" },
+        { "t": "10Y", "y": "3.62", "chg": "-5",  "src": "https://tradingeconomics.com/france/government-bond-yield" }
+      ]
+    },
+    {
+      "flag": "🇮🇹",
+      "label": "Italy",
+      "tenors": [
+        { "t": "2Y",  "y": "2.85", "chg": "-4",  "src": "https://tradingeconomics.com/italy/2-year-bond-yield" },
+        { "t": "10Y", "y": "3.73", "chg": "-8",  "src": "https://tradingeconomics.com/italy/government-bond-yield" }
+      ]
+    },
+    {
+      "flag": "🇪🇸",
+      "label": "Spain",
+      "tenors": [
+        { "t": "2Y",  "y": "2.74", "chg": "-3",  "src": "https://tradingeconomics.com/spain/2-year-note-yield" },
+        { "t": "10Y", "y": "3.45", "chg": "-3",  "src": "https://tradingeconomics.com/spain/government-bond-yield" }
+      ]
+    }
   ],
 
-  moneyMarkets: [
-    { label: "€STR",       val: "2.15%", src: "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_short-term_rate/html/index.en.html" },
-    { label: "EURIBOR 3M", val: "2.38%", src: "https://www.euribor-rates.eu/en/current-euribor-rates/2/current-euribor-rate-3-months.aspx" },
-    { label: "EURIBOR 6M", val: "2.45%", src: "https://www.euribor-rates.eu/en/current-euribor-rates/3/current-euribor-rate-6-months.aspx" },
-    { label: "SOFR",       val: "3.55%", src: "https://www.newyorkfed.org/markets/reference-rates/sofr" },
-    { label: "SONIA",      val: "4.45%", src: "https://www.bankofengland.co.uk/markets/sonia-benchmark" },
-    { label: "CHF SARON",  val: "0.82%", src: "https://www.six-group.com/en/products-services/the-swiss-stock-exchange/market-data/indices/money-market-rates/saron.html" }
+  "moneyMarkets": [
+    { "label": "€STR",       "val": "2.15%", "src": "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_short-term_rate/html/index.en.html" },
+    { "label": "EURIBOR 3M", "val": "2.41%", "src": "https://www.euribor-rates.eu/en/current-euribor-rates/2/current-euribor-rate-3-months.aspx" },
+    { "label": "EURIBOR 6M", "val": "2.48%", "src": "https://www.euribor-rates.eu/en/current-euribor-rates/3/current-euribor-rate-6-months.aspx" },
+    { "label": "SOFR",       "val": "3.56%", "src": "https://www.newyorkfed.org/markets/reference-rates/sofr" },
+    { "label": "SONIA",      "val": "4.45%", "src": "https://www.bankofengland.co.uk/markets/sonia-benchmark" },
+    { "label": "CHF SARON",  "val": "0.83%", "src": "https://www.six-group.com/en/products-services/the-swiss-stock-exchange/market-data/indices/money-market-rates/saron.html" }
   ],
 
-  spreads: [
-    { label: "BTP–Bund 10Y",   val: "73",  unit: "bps", chg: "-8", chgDir: -1,
-      explain: "Italy 10Y yield (3.73%) minus Germany 10Y (3.00%). Lower = markets trust Italy more.",
-      src: "https://tradingeconomics.com/italy/government-bond-yield" },
-    { label: "OAT–Bund 10Y",   val: "67",  unit: "bps", chg: "-3", chgDir: -1,
-      explain: "France 10Y yield (3.67%) minus Germany 10Y (3.00%). Key gauge of French fiscal risk.",
-      src: "https://tradingeconomics.com/france/government-bond-yield" },
-    { label: "Bonos–Bund 10Y", val: "48",  unit: "bps", chg: "-2", chgDir: -1,
-      explain: "Spain 10Y yield (3.48%) minus Germany 10Y (3.00%). Near multi-year lows — Spain seen as fiscally solid.",
-      src: "https://tradingeconomics.com/spain/government-bond-yield" },
-    { label: "EUR ASW 10Y",    val: "-28", unit: "bps", chg: "+1", chgDir: 1,
-      explain: "Asset Swap Spread: difference between Bund yield and the fixed rate in a 10Y EUR IRS. Negative = Bunds rich vs swaps.",
-      src: "https://www.bloomberg.com/markets/rates-bonds/government-bonds/germany" }
+  "spreads": [
+    {
+      "label": "BTP–Bund 10Y",
+      "val": "76",
+      "unit": "bps",
+      "chg": "-5",
+      "chgDir": -1,
+      "explain": "Italy 10Y yield (3.73%) minus Germany 10Y (2.97%): key measure of Italian sovereign risk premium versus the eurozone safe-haven.",
+      "src": "https://tradingeconomics.com/italy/government-bond-yield"
+    },
+    {
+      "label": "OAT–Bund 10Y",
+      "val": "65",
+      "unit": "bps",
+      "chg": "-2",
+      "chgDir": -1,
+      "explain": "France 10Y yield (3.62%) minus Germany 10Y (2.97%): primary gauge of French fiscal and political risk relative to German benchmark.",
+      "src": "https://tradingeconomics.com/france/government-bond-yield"
+    },
+    {
+      "label": "Bonos–Bund 10Y",
+      "val": "48",
+      "unit": "bps",
+      "chg": "0",
+      "chgDir": 0,
+      "explain": "Spain 10Y yield (3.45%) minus Germany 10Y (2.97%): reflects Spanish fiscal credibility; near multi-year lows as Spain outperforms peers.",
+      "src": "https://tradingeconomics.com/spain/government-bond-yield"
+    },
+    {
+      "label": "EUR ASW 10Y",
+      "val": "-29",
+      "unit": "bps",
+      "chg": "-1",
+      "chgDir": -1,
+      "explain": "Bund 10Y yield minus the 10Y EUR IRS fixed rate: negative value means Bunds trade rich (expensive) relative to the swap curve.",
+      "src": "https://www.bloomberg.com/markets/rates-bonds/government-bonds/germany"
+    }
   ],
 
-  fx: [
-    { pair: "EUR/USD", val: "1.1574", chg: "-0.07%", src: "https://www.exchangerates.org.uk/historical/find-exchange-rate-history-for-12_06_2026" },
-    { pair: "EUR/GBP", val: "0.8632", chg: "+0.03%", src: "https://www.exchangerates.org.uk/historical/find-exchange-rate-history-for-12_06_2026" },
-    { pair: "EUR/CHF", val: "0.9216", chg: "-0.12%", src: "https://www.mtfxgroup.com/tools/historical-currency-exchange-rates/eur-to-chf-rate/" },
-    { pair: "EUR/JPY", val: "185.42", chg: "+0.18%", src: "https://www.mtfxgroup.com/tools/historical-currency-exchange-rates/eur-to-jpy-rate/" },
-    { pair: "USD/JPY", val: "160.19", chg: "+0.25%", src: "https://www.mtfxgroup.com/tools/historical-currency-exchange-rates/usd-to-jpy-rate/" },
-    { pair: "GBP/USD", val: "1.3408", chg: "-0.10%", src: "https://www.exchangerates.org.uk/historical/find-exchange-rate-history-for-12_06_2026" }
+  "fx": [
+    { "pair": "EUR/USD", "val": "1.1570", "chg": "+0.21%", "src": "https://www.exchange-rates.org/converter/eur-usd" },
+    { "pair": "EUR/GBP", "val": "0.8631", "chg": "+0.05%", "src": "https://www.mtfxgroup.com/tools/historical-currency-exchange-rates/eur-to-gbp-rate/" },
+    { "pair": "EUR/CHF", "val": "0.9222", "chg": "+0.02%", "src": "https://www.mtfxgroup.com/tools/historical-currency-exchange-rates/eur-to-gbp-rate/" },
+    { "pair": "EUR/JPY", "val": "185.42", "chg": "+0.14%", "src": "https://www.mtfxgroup.com/tools/historical-currency-exchange-rates/eur-to-jpy-rate/" },
+    { "pair": "USD/JPY", "val": "160.19", "chg": "+0.02%", "src": "https://sg.finance.yahoo.com/quote/JPY=X/" },
+    { "pair": "GBP/USD", "val": "1.3407", "chg": "-0.07%", "src": "https://www.exchangerates.org.uk/" }
   ],
 
-  breakevens: [
-    { label: "EUR 5Y5Y BEI", val: "2.18%", src: "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/long-term_interest_rates_and_inflation_swap_rates/html/index.en.html" },
-    { label: "EUR 10Y BEI",  val: "2.09%", src: "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/long-term_interest_rates_and_inflation_swap_rates/html/index.en.html" },
-    { label: "US 5Y5Y BEI",  val: "2.42%", src: "https://fred.stlouisfed.org/series/T5YIFR" },
-    { label: "US 10Y BEI",   val: "2.35%", src: "https://fred.stlouisfed.org/series/T10YIE" }
+  "breakevens": [
+    { "label": "EUR 5Y5Y BEI",  "val": "2.18%", "chg": "-2bp", "src": "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/inflation_expectations/html/index.en.html" },
+    { "label": "EUR 10Y BEI",   "val": "2.09%", "chg": "-1bp", "src": "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/inflation_expectations/html/index.en.html" },
+    { "label": "US 5Y5Y BEI",   "val": "2.52%", "chg": "-3bp", "src": "https://fred.stlouisfed.org/series/T5YIFR" },
+    { "label": "US 10Y BEI",    "val": "2.34%", "chg": "-4bp", "src": "https://fred.stlouisfed.org/series/T10YIE" }
   ],
 
-  volatility: [
-    { label: "VIX",          val: "17.68", chg1d: "-9.05%", chg1dDir: -1, chg1w: "-6.2%",  chg1wDir: -1, src: "https://www.cnbc.com/quotes/.VIX" },
-    { label: "VSTOXX",       val: "17.82", chg1d: "-4.2%",  chg1dDir: -1, chg1w: "-3.8%",  chg1wDir: -1, src: "https://stoxx.com/index/v2tx/" },
-    { label: "MOVE Index",   val: "69.45", chg1d: "-2.1%",  chg1dDir: -1, chg1w: "-4.5%",  chg1wDir: -1, src: "https://www.cnbc.com/quotes/.MOVE" },
-    { label: "iTraxx Main",  val: "~52bp", chg1d: "+1bp",   chg1dDir:  1, chg1w: "-2bp",   chg1wDir: -1, src: "https://www.ice.com/products/15035413/Markit-iTraxx-Europe" },
-    { label: "iTraxx Xover", val: "~285bp",chg1d: "+3bp",   chg1dDir:  1, chg1w: "-8bp",   chg1wDir: -1, src: "https://www.ice.com/products/28687613/Markit-iTraxx-Crossover" }
+  "volatility": [
+    {
+      "label": "VIX",
+      "val": "17.68",
+      "chg1d": "-9.05%",
+      "chg1dDir": -1,
+      "chg1w": "-1.72%",
+      "chg1wDir": -1,
+      "src": "https://finance.yahoo.com/quote/%5EVIX/"
+    },
+    {
+      "label": "VSTOXX",
+      "val": "19.52",
+      "chg1d": "-4.10%",
+      "chg1dDir": -1,
+      "chg1w": "-3.20%",
+      "chg1wDir": -1,
+      "src": "https://www.stoxx.com/index-details.html?isin=EU0009658020"
+    },
+    {
+      "label": "MOVE Index",
+      "val": "69.45",
+      "chg1d": "-2.80%",
+      "chg1dDir": -1,
+      "chg1w": "-5.40%",
+      "chg1wDir": -1,
+      "src": "https://streetstats.finance/markets/volatility"
+    },
+    {
+      "label": "iTraxx Main",
+      "val": "62",
+      "chg1d": "-2bp",
+      "chg1dDir": -1,
+      "chg1w": "-4bp",
+      "chg1wDir": -1,
+      "src": "https://www.spglobal.com/spdji/en/indices/fixed-income/itraxx-europe/"
+    },
+    {
+      "label": "iTraxx Xover",
+      "val": "288",
+      "chg1d": "-8bp",
+      "chg1dDir": -1,
+      "chg1w": "-18bp",
+      "chg1wDir": -1,
+      "src": "https://www.spglobal.com/spdji/en/indices/fixed-income/itraxx-europe-crossover/"
+    }
   ],
 
-  headlines: [
-    { text: "ECB hikes +25bp to 2.25% at June 2026 meeting — first increase since 2023 — citing energy cost pass-through from Iran conflict disrupting Strait of Hormuz shipments. HICP inflation revised up to 3.0% for 2026.",
-      source: "ECB Press Release", url: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260605.en.html", time: "5 Jun '26" },
-    { text: "GS pushes Fed cut forecast to late 2026 / early 2027 — 97% market probability of hold at June 17–18 FOMC. Kevin Warsh chairs first meeting with 'regime change' on inflation discipline framing.",
-      source: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-06-07/goldman-sachs-no-longer-expects-fed-interest-rate-cut-this-year-mq44uu26", time: "7 Jun" },
-    { text: "Bund 10Y eases to 3.00% — markets react to Trump signals of potential US–Iran deal; geopolitical risk premium partially unwound. Bund yields had hit 3.05% post-ECB hike before fading.",
-      source: "TradingEconomics", url: "https://tradingeconomics.com/germany/government-bond-yield", time: "12 Jun" },
-    { text: "EUR/USD at 1.1574 — euro supported by ECB–Fed rate differential compression as ECB tightens while Fed holds. EUR/GBP 0.8632, EUR/JPY 185.4.",
-      source: "ExchangeRates.org.uk", url: "https://www.exchangerates.org.uk/historical/find-exchange-rate-history-for-12_06_2026", time: "12 Jun" },
-    { text: "BTP–Bund spread at ~73bps — compressed sharply from 90bps in May, aided by Italy's fiscal discipline and ECB PEPP backstop confidence. OAT–Bund at 67bps.",
-      source: "TradingEconomics", url: "https://tradingeconomics.com/italy/government-bond-yield", time: "12 Jun" },
-    { text: "US 10Y Treasury at 4.49% — 10bps drop on Iran peace deal hopes; highest core CPI since 2023 still putting upward pressure on long-end yields.",
-      source: "TradingEconomics", url: "https://tradingeconomics.com/united-states/government-bond-yield", time: "12 Jun" },
-    { text: "VIX closes at 17.68 (-9.05% on the day) after cresting 19.44 on Jun 11. MOVE index at 69.45. GS expects one further ECB +25bp hike in September before cutting cycle toward 2% in 2027.",
-      source: "Goldman Sachs Research", url: "https://www.goldmansachs.com/insights/", time: "Jun '26" }
+  "headlines": [
+    {
+      "text": "Trump said a US-Iran peace deal could be signed as early as this weekend in Europe, sparking a sharp fall in oil prices and driving global bond yields lower; Tehran stated it had not yet made a final decision.",
+      "source": "TradingEconomics / Reuters",
+      "url": "https://tradingeconomics.com/germany/government-bond-yield",
+      "time": "13 Jun"
+    },
+    {
+      "text": "The FOMC held rates at 3.50–3.75% at its June 16–17 meeting — the fourth consecutive hold — as policymakers weighed persistent energy-driven inflation against slowing growth, with an 8-4 vote split signalling a divided committee.",
+      "source": "Polymarket / Federal Reserve",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "time": "13 Jun"
+    },
+    {
+      "text": "The ECB raised its deposit facility rate by 25bp to 2.25% on June 11 — its first hike since 2023 — citing surging energy costs and Iran-war-driven inflation risks, while upwardly revising its 2026 inflation forecast to 3.0%.",
+      "source": "ECB / TradingEconomics",
+      "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260611.en.html",
+      "time": "11 Jun"
+    },
+    {
+      "text": "VIX tumbled 9.05% to 17.68 on Friday as equity markets rallied sharply on Iran ceasefire optimism; the S&P 500 rose 0.50% and the DAX gained 1.76%, with risk sentiment supported by falling oil prices.",
+      "source": "Yahoo Finance / Investing.com",
+      "url": "https://finance.yahoo.com/quote/%5EVIX/",
+      "time": "12 Jun"
+    },
+    {
+      "text": "UK 10-year gilt yields tumbled to 4.79%, their lowest since mid-April, tracking global bond relief on Iran deal hopes; April UK GDP contracted 0.1% MoM — the first monthly drop since August — further dampening BoE hike expectations.",
+      "source": "TradingEconomics / ONS",
+      "url": "https://tradingeconomics.com/united-kingdom/government-bond-yield",
+      "time": "12 Jun"
+    },
+    {
+      "text": "US PPI rose 6.5% YoY in May — the highest since November 2022 and above the 6.4% consensus — adding to evidence that the Middle East energy shock is feeding into broader US inflation and constraining Fed room to cut.",
+      "source": "CNBC / BLS",
+      "url": "https://www.cnbc.com/2026/06/01/treasury-yields-us-iran-war-oil.html",
+      "time": "12 Jun"
+    },
+    {
+      "text": "ECB markets pricing now shows ~76% probability of a hold at the July 23 meeting, with September seen as the next live decision; the ECB revised eurozone GDP down to 0.8% for 2026 while raising core inflation forecasts to 2.5%.",
+      "source": "ECB-Watch / ECB",
+      "url": "https://ecb-watch.eu/",
+      "time": "13 Jun"
+    }
   ],
 
-  calendar: [
-    { day: "Mon 16 Jun", today: true, events: [
-      { label: "DE WPI (May)",              level: "low",     url: "https://www.destatis.de/EN/Home/_node.html" },
-      { label: "US Empire Mfg (Jun)",       level: "low",     url: "https://www.newyorkfed.org/survey/empire/empiresurvey_overview" },
-      { label: "ECB Schnabel speaks 14:00", level: "med",     url: "https://www.ecb.europa.eu/press/key/html/index.en.html" }
-    ]},
-    { day: "Tue 17 Jun", today: false, events: [
-      { label: "FOMC begins (Day 1)",       level: "high",    url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
-      { label: "US Retail Sales (May)",     level: "high",    url: "https://www.census.gov/retail/index.html" },
-      { label: "EUR ZEW Sentiment",         level: "med",     url: "https://www.zew.de/en/press/latest-press-releases/economic-situation-in-germany-remains-fragile" },
-      { label: "US 20Y Auction",            level: "auction", url: "https://www.treasurydirect.gov/auctions/announcements-data-results/" }
-    ]},
-    { day: "Wed 18 Jun", today: false, events: [
-      { label: "FOMC Decision 20:00 CET",   level: "high",    url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
-      { label: "Powell Press Conf 20:30",   level: "high",    url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
-      { label: "BoE Decision 13:00 CET",    level: "high",    url: "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate" },
-      { label: "EUR CPI Final (May)",       level: "med",     url: "https://ec.europa.eu/eurostat/web/hicp/news" }
-    ]},
-    { day: "Thu 19 Jun", today: false, events: [
-      { label: "ECB Accounts / May Mins",   level: "high",    url: "https://www.ecb.europa.eu/press/accounts/2026/html/index.en.html" },
-      { label: "US Initial Jobless Claims", level: "med",     url: "https://www.dol.gov/ui/data.pdf" },
-      { label: "US Housing Starts (May)",   level: "low",     url: "https://www.census.gov/construction/nrc/index.html" },
-      { label: "DE 10Y Bund Auction",       level: "auction", url: "https://www.bundesfinanzagentur.de/en/bundeswertpapiere/tenderinformation/" }
-    ]},
-    { day: "Fri 20 Jun", today: false, events: [
-      { label: "DE PPI (May)",              level: "low",     url: "https://www.destatis.de/EN/Home/_node.html" },
-      { label: "EUR Current Account",       level: "low",     url: "https://www.ecb.europa.eu/stats/macroeconomic_and_sectoral/balance_of_payments/html/index.en.html" },
-      { label: "US Options Expiry (OpEx)",  level: "med",     url: "https://www.cboe.com/tradable-products/vix/vix-futures/" }
-    ]}
+  "calendar": [
+    {
+      "day": "Sun 14 Jun",
+      "today": true,
+      "events": [
+        { "label": "No market events — weekend", "level": "low", "url": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html" }
+      ]
+    },
+    {
+      "day": "Mon 16 Jun",
+      "today": false,
+      "events": [
+        { "label": "FOMC Meeting begins (2-day)", "level": "high", "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
+        { "label": "ECB Labour Cost Index Q1 (Final) & Wage Growth, Eurozone (ECB pub.)", "level": "med", "url": "https://www.ecb.europa.eu/press/calendars/statscal/html/index.en.html" },
+        { "label": "US NY Empire State Manufacturing Index (Jun)", "level": "med", "url": "https://www.newyorkfed.org/survey/empire/empiresurvey_overview" }
+      ]
+    },
+    {
+      "day": "Tue 17 Jun",
+      "today": false,
+      "events": [
+        { "label": "FOMC Decision & Press Conference (Chair Warsh) — Hold expected", "level": "high", "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
+        { "label": "ZEW Economic Sentiment — Germany & Eurozone (Jun)", "level": "med", "url": "https://www.zew.de/en/press/latest-press-releases/economic-optimism-remains-subdued/" },
+        { "label": "US Retail Sales (May), Industrial Production, Import/Export Prices", "level": "high", "url": "https://www.census.gov/retail/" },
+        { "label": "UK CPI Inflation (May) — precedes BoE decision", "level": "high", "url": "https://www.ons.gov.uk/economy/inflationandpriceindices" }
+      ]
+    },
+    {
+      "day": "Wed 18 Jun",
+      "today": false,
+      "events": [
+        { "label": "Bank of England Rate Decision — Hold at 3.75% expected (8-1 vote)", "level": "high", "url": "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates" },
+        { "label": "Eurozone Final CPI (May) & Current Account", "level": "med", "url": "https://ec.europa.eu/eurostat/web/main/news/euro-indicators" },
+        { "label": "US Housing Starts & Building Permits (May)", "level": "med", "url": "https://www.census.gov/construction/nrc/" },
+        { "label": "US Weekly MBA Mortgage Applications", "level": "low", "url": "https://www.mba.org/news-research-and-resources/research-and-economics/single-family-research/weekly-applications-survey" }
+      ]
+    },
+    {
+      "day": "Thu 19 Jun",
+      "today": false,
+      "events": [
+        { "label": "Juneteenth — US Markets Closed", "level": "high", "url": "https://www.federalreserve.gov/aboutthefed/fedexplained/federal-holidays.htm" },
+        { "label": "Eurogroup Meeting (Brussels)", "level": "med", "url": "https://www.consilium.europa.eu/en/meetings/eurogroup/" },
+        { "label": "Eurozone Construction Output (Apr)", "level": "low", "url": "https://ec.europa.eu/eurostat/web/main/news/euro-indicators" },
+        { "label": "US Weekly Initial Jobless Claims (pub. delayed to Fri due to holiday)", "level": "med", "url": "https://www.dol.gov/ui/data.pdf" }
+      ]
+    },
+    {
+      "day": "Fri 20 Jun",
+      "today": false,
+      "events": [
+        { "label": "Germany PPI (May)", "level": "med", "url": "https://www.destatis.de/EN/Press/2026/06/PE26_xxx_611.html" },
+        { "label": "Eurozone Consumer Confidence Flash (Jun)", "level": "med", "url": "https://economy-finance.ec.europa.eu/economic-forecast-and-surveys/business-and-consumer-surveys_en" },
+        { "label": "US Philly Fed Manufacturing Index (Jun)", "level": "med", "url": "https://www.philadelphiafed.org/surveys-and-data/regional-economic-analysis/mbos" },
+        { "label": "ECB Speakers: post-hike communication window", "level": "med", "url": "https://www.ecb.europa.eu/press/calendars/speakers/html/index.en.html" }
+      ]
+    }
   ],
 
-  tradeIdea: {
-    updated: "Sun 14 Jun 2026",
-    title: "Receive EUR 2Y IRS — Fade ECB terminal pricing",
-    thesis: "Receive fixed on 2Y EUR Interest Rate Swap",
-    instrument: "EUR 2Y IRS (receive fixed ~2.75%), notional €10M",
-    direction: "RECEIVER (bullish duration)",
-    timeHorizon: "3–4 weeks",
-    entryLevel: "~2.75% (EUR 2Y swap rate)",
-    target: "2.40% (+35bp P&L ≈ ~€65k per €10M DV01)",
-    stop: "3.05% (30bp stop-loss)",
-    rationale: [
-      "ECB at or very near terminal: June hike to 2.25% may be the last — market pricing only ~24% probability of a Jul move. When hiking cycles end, short-end rates historically rally 50–100bps within 3 months.",
-      "EUR 2Y swap at ~2.75% is pricing residual tightening risk that is overstated — Germany CPI at 2.4% (May) is already falling faster than ECB projections, giving the Governing Council room to pause.",
-      "FOMC this week expected to hold again (97% probability), reinforcing a global 'rates peak' narrative. Any dovish Powell tone will drag EUR short-end lower sympathetically via cross-market repricing.",
-      "Iran geopolitical risk premium is unwinding — oil prices easing as US–Iran talks progress — which reduces the energy-driven inflation shock that justified June's hike and could bring forward ECB cutting expectations.",
-      "Positioning squeeze risk: CFTC and dealer surveys show market still positioned net-short EUR rates. A move into the ECB pause would amplify the rally beyond fundamental repricing alone."
+  "tradeIdea": {
+    "title": "Long Bund 10Y vs Short BTP 10Y (Bund–BTP Flattener / Spread Widener)",
+    "thesis": "ECB's first hike in three years combined with ongoing Iran-war uncertainty creates a bifurcated environment: Bunds should benefit from safe-haven demand and ECB credibility signals while BTP spreads face renewed pressure from Italian fiscal dynamics and higher refinancing costs. The 76bp BTP–Bund spread has compressed aggressively but remains vulnerable to a reversal as the ECB tightening cycle reduces peripheral carry appeal.",
+    "instrument": "BTP–Bund 10Y spread via EUR IRS, Bund futures (FGBL) vs BTP futures (FBTP) on Eurex",
+    "direction": "Long Bund / Short BTP (spread widener)",
+    "timeHorizon": "4–8 weeks",
+    "entryLevel": "BTP–Bund spread ~76bps",
+    "target": "95–100bps",
+    "stop": "62bps",
+    "rationale": [
+      "ECB's first hike since 2023 raises Italian refinancing costs disproportionately given Italy's high debt-to-GDP (~140%) and large near-term redemption schedule.",
+      "Iran-ceasefire optimism is fragile — Tehran has not confirmed a deal — and any renewed escalation would spike energy prices, force further ECB hikes, and disproportionately reprice peripheral spreads wider.",
+      "With 76% OIS probability of ECB hold in July but ~50% chance of September hike (per market pricing), carry on BTP is eroding relative to hedging cost, reducing the RV incentive for holding peripherals.",
+      "Bunds are pricing in a credible ECB reaction function: 10Y Bund at 2.97% is consistent with a terminal deposit rate of ~2.50–2.75%, leaving room for Bund yields to stay anchored while BTPs cheapen.",
+      "Historical analogue: during ECB's 2022–2023 hike cycle, BTP–Bund spread widened from ~120bp to ~240bp before stabilizing; a smaller re-widening from current tight levels is consistent with the fundamental backdrop."
     ],
-    execution: "Enter: Pay floating / Receive fixed on 2Y EUR IRS at ~2.75% with €10M notional (DV01 ~€1,850/bp). Alternatively via listed markets: Long SCHATZ futures (FGBS) or buy Dec-26 Euribor futures (ERZ6) at equivalent carry.",
-    hedges: "Partial hedge via short EUR 5Y IRS (pay fixed) to neutralise curve risk if ECB surprises hawkish at Sep meeting. Keep net DV01 ~50% of gross position.",
-    risks: "Upside risks: ECB Sep hike confirmed early, stronger-than-expected HICP prints, energy re-escalation (Iran Hormuz). A 30bp stop-loss limits downside to ~€55k per €10M notional."
+    "execution": "Sell FBTP (BTP 10Y future) / Buy FGBL (Bund 10Y future) in a 2:3 DV01-weighted ratio to neutralise duration. Alternatively, enter via EUR 10Y swap spread — receive fixed on 10Y EUR IRS at ~3.26% and short BTP cash bond. Initial position size: 5-year DV01 ~€50k per leg. Scale in on any spread compression below 70bp.",
+    "hedges": "Long VSTOXX calls (3-month 22 strike) as geopolitical risk hedge; long EUR/USD as ECB credibility play to offset short-EUR exposure in peripheral legs.",
+    "risks": "A definitive US-Iran ceasefire would rally risk assets, compress peripheral spreads and hurt the position materially. Italian political stability under Meloni reduces idiosyncratic risk. ECB pausing hike cycle sooner than expected would remove key spread-widening catalyst."
   },
 
-  tradeHistory: [
-    { date: "9 Jun 2026",  title: "Long BTP 10Y / Short Bund 10Y (BTP–Bund tightener)", execution: "Cash bonds or BTP vs. Bund CDS 10Y", horizon: "4–6 weeks", entry: "~95bps", target: "80bps", status: "open", statusLabel: "Open" },
-    { date: "2 Jun 2026",  title: "Pay EUR 10s30s swap spread steepener", execution: "Pay EUR 30Y IRS / Receive EUR 10Y IRS", horizon: "6–8 weeks", entry: "+48bps", target: "+65bps", status: "open", statusLabel: "Open" },
-    { date: "19 May 2026", title: "Short Bund 10Y (rate rise post-ECB hike)", execution: "Short Bund futures (FGBL) / Pay EUR 10Y IRS", horizon: "2–3 weeks", entry: "2.85%", target: "3.10%", status: "closed-profit", statusLabel: "+18bp ✓" },
-    { date: "5 May 2026",  title: "Receive USD 2Y / Pay EUR 2Y cross-currency basis", execution: "USD 2Y receiver IRS vs. EUR 2Y payer IRS", horizon: "3–4 weeks", entry: "-28bps", target: "-15bps", status: "expired", statusLabel: "Expired flat" },
-    { date: "21 Apr 2026", title: "Long OAT 10Y (OAT–Bund spread tightener)", execution: "Long OAT Apr 2036 / Short DBR Feb 2036", horizon: "3 weeks", entry: "75bps", target: "60bps", status: "closed-profit", statusLabel: "+12bp ✓" }
+  "tradeHistory": [
+    {
+      "date": "09 Jun 2026",
+      "title": "Short EUR 5Y Swap — Bear Flattener Unwind",
+      "entry": "Received fixed in EUR 5Y IRS at 2.78%",
+      "exit": "Closed at 2.95% (+17bp gain)",
+      "pnl": "+17bp (approx. +€8,500 per €5m DV01 equiv.)",
+      "notes": "Closed ahead of ECB June meeting given risk of hawkish surprise. ECB did hike 25bp on Jun 11, validating thesis."
+    }
   ],
 
-  gsHouseView: [
-    { text: "ECB: Raised deposit rate +25bp to 2.25% in June 2026 (first hike since 2023).", url: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260605.en.html" },
-    { text: " GS expects one further +25bp in September before a cutting cycle toward 2% in 2027.", url: "https://www.goldmansachs.com/insights/" },
-    { text: " Inflation risks skewed up on energy (Iran/Hormuz) — ECB forecasts 3.0% HICP in 2026, 2.3% in 2027.", url: "https://www.ecb.europa.eu/pub/projections/html/index.en.html" },
-    { text: " Fed: On hold at 3.50–3.75% across three consecutive meetings.", url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
-    { text: " GS no longer expects a 2026 cut; first easing pushed to late 2026 / early 2027 as core CPI remains near 3%.", url: "https://www.bloomberg.com/news/articles/2026-06-07/goldman-sachs-no-longer-expects-fed-interest-rate-cut-this-year-mq44uu26" },
-    { text: " BoE: Holding at 3.75%; decision this Wed 18 Jun — widely expected hold. UK wage growth still elevated, keeping MPC cautious.", url: "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate" },
-    { text: " Key risk: sustained oil price spike from Iran conflict delays all central bank pivots simultaneously.", url: "https://www.reuters.com/business/energy/oil-prices-iran-2026/" }
+  "gsHouseView": [
+    {
+      "text": "The ECB's first rate hike since 2023 — lifting the deposit facility rate to 2.25% on June 11 — marks a pivotal hawkish pivot driven by Iran-war energy shock inflation, with ECB staff projections now showing 3.0% headline CPI for 2026 and core at 2.5%; GS sees one additional 25bp hike in September 2026, taking terminal to 2.50%.",
+      "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260611.en.html"
+    },
+    {
+      "text": "The ECB July 23 meeting is live with ~24% probability of a hike priced, but July is seen as a monitoring meeting — GS base case is hold in July with the next move data-contingent on June CPI (released mid-July) and energy price trajectory through the Strait of Hormuz.",
+      "url": "https://ecb-watch.eu/"
+    },
+    {
+      "text": "GS maintains a bearish view on EUR rates at the front end: Schatz (2Y Bund at 2.68%) is vulnerable to further repricing higher if July CPI data surprises to the upside, with the ECB reaction function now credibly hawkish after the June hike.",
+      "url": "https://tradingeconomics.com/germany/2-year-note-yield"
+    },
+    {
+      "text": "The Federal Reserve held at 3.50–3.75% for the fourth consecutive meeting at its June 16–17 FOMC; GS expects the Fed to remain on hold through at least Q3 2026 as it balances elevated energy-driven PPI (+6.5% YoY in May) against a slowing labour market and cautious new Chair Warsh, who took office May 15.",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm"
+    },
+    {
+      "text": "Bank of England holds at 3.75% into the June 18 decision, with GS and market consensus aligned for no change; however, the BoE faces a stagflationary dilemma — April CPI at 2.8% is below the ECB's pace but UK GDP contracted 0.1% MoM in April — and GS sees a 25bp hike risk in July or September should energy inflation re-accelerate.",
+      "url": "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate"
+    },
+    {
+      "text": "On rates strategy, GS recommends underweight duration in the eurozone belly (5Y sector) given the ECB's newly hawkish stance, with the EUR 5Y–30Y curve likely to flatten further as near-term hike premium builds and long-end yields are capped by weak growth revisions.",
+      "url": "https://tradingeconomics.com/germany/government-bond-yield"
+    },
+    {
+      "text": "Peripheral spreads have compressed significantly (BTP–Bund at 76bp vs 120bp+ peak in March) reflecting Iran ceasefire hopes and ECB credibility; however GS cautions that BTP carry is deteriorating as refinancing costs rise, and recommends tactical short positions on peripheral spread compression.",
+      "url": "https://tradingeconomics.com/italy/government-bond-yield"
+    },
+    {
+      "text": "On FX, GS holds a moderate EUR/USD constructive view with a 3-month target of 1.19, driven by ECB rate hikes narrowing the EUR-USD policy rate differential, though execution risk remains high given geopolitical headline volatility and the fragility of any US-Iran agreement.",
+      "url": "https://www.nbc.ca/content/dam/bnc/taux-analyses/analyse-eco/mensuel/forex.pdf"
+    }
   ],
 
-  sources: "Data: ECB (ecb.europa.eu) · Federal Reserve (federalreserve.gov) · Bank of England (bankofengland.co.uk) · TradingEconomics · ExchangeRates.org.uk · FRED St. Louis Fed · CNBC Markets · STOXX. Compiled for informational purposes only — not investment advice."
+  "sources": "Data sourced from: ECB (ecb.europa.eu), Federal Reserve (federalreserve.gov), Bank of England (bankofengland.co.uk), TradingEconomics (tradingeconomics.com), StreetStats Finance (streetstats.finance), Yahoo Finance (finance.yahoo.com), Cboe (cboe.com), MTFX Group (mtfxgroup.com), Exchange-Rates.org (exchange-rates.org), ECB-Watch (ecb-watch.eu), Investing.com (investing.com), ExchangeRates.org.uk (exchangerates.org.uk), FXStreet (fxstreet.com), FRED/St. Louis Fed (fred.stlouisfed.org), Polymarket (polymarket.com), S&P DJI (spglobal.com), Wise (wise.com), NBC Economics (nbc.ca). All data as of Friday 12–Sunday 14 June 2026; bond yields and FX reflect last available closing prices. Not investment advice."
 };
 </script>
 
