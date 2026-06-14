@@ -130,7 +130,7 @@ sources must end with: "Not investment advice."
 
 print("Calling Claude API with web search (this may take 1-2 minutes)...")
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-sonnet-4-6",
     max_tokens=16000,
     tools=[{
         "type": "web_search_20250305",
